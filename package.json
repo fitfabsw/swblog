@@ -1,7 +1,8 @@
 {
   "scripts": {
     "test": "echo I am kevin lee",
-    "dev": "hugo server --disableFastRender"
+    "dev": "hugo server --disableFastRender",
+    "build": "hugo"
   },
   "dependencies": {
     "install": "^0.13.0",
