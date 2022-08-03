@@ -9,12 +9,36 @@ import CMS from "netlify-cms-app";
  * Netlify CMS the old way.
  */
 //init()
-CMS.init()
+CMS.init();
+
+
+if (window.netlifyIdentity) {
+  console.log("AAA");
+  window.netlifyIdentity.on("init", (user) => {
+    console.log("BBB");
+    console.log(user);
+    if (!user) {
+      console.log("CCC");
+      window.netlifyIdentity.on("", () => {
+        console.log("UUU");
+      });
+      window.netlifyIdentity.on("/", () => {
+        console.log("DDD");
+      });
+      window.netlifyIdentity.on("login", (user) => {
+        console.log("EEE");
+        console.log(user);
+      });
+    }
+  });
+}
 
 CMS.registerEventListener({
-  name: 'preSave',
+  name: "preSave",
   handler: ({ entry }) => {
-    console.log("GGGGGGGGGGGGGGGGGGGGGGGGG");
-    return entry.get('data').set('title', 'new title');
+    console.log("========= author !!!!!!!!!!!!!!!!!!!!!!!");
+    const author = JSON.parse(localStorage.getItem("netlify-cms-user")).name;
+    console.log(author);
+    return entry.get("data").set("author", author);
   },
 });
