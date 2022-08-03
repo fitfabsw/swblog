@@ -8,6 +8,9 @@ media_folder: "static/img" # 存放多媒體的資料夾
 public_folder: "/img"
 locale: "zh_Hant" # 語系 https://github.com/netlify/netlify-cms/tree/master/packages/netlify-cms-locales/src
 
+# npx netlify-cms-proxy-server
+local_backend: true
+
 collections: # https://www.netlifycms.org/docs/configuration-options/#collections
   - name: 'posts'
     label: '文章'
