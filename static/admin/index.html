@@ -37,6 +37,14 @@
               author = user.email.split("@")[0];
               console.log("author");
               console.log(author);
+
+              let div = document.createElement("div");
+              div.textContent = "Welcome, " + author;
+              div.style.backgroundColor = "white";
+              div.style.fontSize = "1.5em";
+              div.style.padding = "5px";
+              div.style.borderBottom = "1px solid black";
+              document.body.insertAdjacentElement("beforebegin", div);
             });
           }
         });
