@@ -21,6 +21,7 @@
         const author_info = JSON.parse(
           localStorage.getItem("netlify-cms-user")
         );
+        console.log(author_info);
         if (author_info) {
           author = author_info.name;
         } else {
