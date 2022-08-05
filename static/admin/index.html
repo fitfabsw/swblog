@@ -21,14 +21,24 @@
         const author_info = JSON.parse(
           localStorage.getItem("netlify-cms-user")
         );
-        console.log(author_info);
         if (author_info) {
-          author = author_info.name;
+          const backendName = author_info.backendName;
+          console.log("author_info");
+          console.log(author_info);
+          console.log("backendName");
+          console.log(backendName);
+          if (backendName !== "proxy") {
+            author = author_info.name;
+            console.log("AAAA");
+          } else {
+            author = "dummy";
+            console.log("BBBB");
+          }
+          console.log("author");
+          console.log(author);
         } else {
-          author = "";
+          author = "before_login";
         }
-        console.log("author");
-        console.log(author);
         CMS.init({
           config: {
             backend: {
@@ -98,7 +108,7 @@
         let div = document.createElement("div");
         console.log("oldDiv");
         console.log(oldDiv);
-        if (author) {
+        if (author && author!="before_login") {
           div.textContent = "Welcome, " + author;
           div.style.backgroundColor = "white";
           div.style.fontSize = "1.5em";
@@ -109,19 +119,19 @@
       });
     </script>
 
-    <script>
-      CMS.registerEventListener({
-        name: "preSave",
-        handler: ({ entry }) => {
-          const author = JSON.parse(
-            localStorage.getItem("netlify-cms-user")
-          ).name;
-          console.log("author");
-          console.log(author);
-          return entry.get("data").set("author", author);
-        },
-      });
-    </script>
+    <!--<script>-->
+    <!--CMS.registerEventListener({-->
+    <!--name: "preSave",-->
+    <!--handler: ({ entry }) => {-->
+    <!--const author = JSON.parse(-->
+    <!--localStorage.getItem("netlify-cms-user")-->
+    <!--).name;-->
+    <!--console.log("author");-->
+    <!--console.log(author);-->
+    <!--return entry.get("data").set("author", author);-->
+    <!--},-->
+    <!--});-->
+    <!--</script>-->
     <!--<script src="/js/my-cms.js"</script>-->
 
     <!-- Add a menu:
