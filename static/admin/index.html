@@ -18,12 +18,16 @@
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const author = JSON.parse(
+        const author_info = JSON.parse(
           localStorage.getItem("netlify-cms-user")
-        ).name;
+        );
+        if (author_info) {
+          author = author_info.name;
+        } else {
+          author = "";
+        }
         console.log("author");
         console.log(author);
-
         CMS.init({
           config: {
             backend: {
@@ -36,7 +40,7 @@
             media_folder: "static/img",
             public_folder: "/img",
             locale: "zh_Hant",
-            local_backend: false,
+            local_backend: true,
             collections: [
               {
                 label: "文章",
@@ -55,7 +59,7 @@
                     label: "AUTHOR",
                     name: "author",
                     widget: "string",
-                    default: author
+                    default: author,
                   },
                   { label: "發布日期", name: "date", widget: "datetime" },
                   {
@@ -88,16 +92,19 @@
             ],
           },
         });
+
         const oldDiv = document.querySelectorAll("div#nc-root > div");
         let div = document.createElement("div");
         console.log("oldDiv");
         console.log(oldDiv);
-        div.textContent = "Welcome, " + author;
-        div.style.backgroundColor = "white";
-        div.style.fontSize = "1.5em";
-        div.style.padding = "5px";
-        div.style.borderBottom = "1px solid black";
-        document.body.insertAdjacentElement("beforebegin", div);
+        if (author) {
+          div.textContent = "Welcome, " + author;
+          div.style.backgroundColor = "white";
+          div.style.fontSize = "1.5em";
+          div.style.padding = "5px";
+          div.style.borderBottom = "1px solid black";
+          document.body.insertAdjacentElement("beforebegin", div);
+        }
       });
     </script>
 
