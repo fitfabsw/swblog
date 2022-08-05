@@ -14,7 +14,11 @@
   <body>
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
     <script>
-      console.log("DDJH");
+      const author = JSON.parse(
+        localStorage.getItem("netlify-cms-user")
+      ).name;
+      console.log("author");
+      console.log(author);
     </script>
 
     <script>
