@@ -12,6 +12,9 @@
     <link rel="shortcut icon" href="#" />
   </head>
   <body>
+    <script>
+      window.CMS_MANUAL_INIT = true;
+    </script>
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -20,6 +23,71 @@
         ).name;
         console.log("author");
         console.log(author);
+
+        CMS.init({
+          config: {
+            backend: {
+              name: "git-gateway",
+              repo: "zealzel/papermodZ",
+              branch: "master-cms",
+              site_url: "papermodz-cms.netlify.app",
+            },
+            load_config_file: false,
+            media_folder: "static/img",
+            public_folder: "/img",
+            locale: "zh_Hant",
+            local_backend: true,
+            collections: [
+              {
+                label: "文章",
+                name: "posts",
+                folder: "content/posts",
+                create: true,
+                slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
+                editor: { preview: true },
+                nested: {
+                  depth: 100,
+                  summary: "{{title}}",
+                },
+                fields: [
+                  { label: "標題", name: "title", widget: "string" },
+                  {
+                    label: "AUTHOR",
+                    name: "author",
+                    widget: "string",
+                    default: author
+                  },
+                  { label: "發布日期", name: "date", widget: "datetime" },
+                  {
+                    label: "Draft",
+                    name: "draft",
+                    widget: "boolean",
+                    default: true,
+                  },
+                  {
+                    label: "摘要",
+                    name: "description",
+                    widget: "string",
+                    default: "ABCD111",
+                  },
+                  { label: "內容", name: "body", widget: "markdown" },
+                  {
+                    label: "標籤",
+                    name: "tags",
+                    widget: "list",
+                    required: false,
+                  },
+                  {
+                    label: "分類",
+                    name: "categories",
+                    widget: "list",
+                    required: false,
+                  },
+                ],
+              },
+            ],
+          },
+        });
         const oldDiv = document.querySelectorAll("div#nc-root > div");
         let div = document.createElement("div");
         console.log("oldDiv");
@@ -27,7 +95,7 @@
         div.textContent = "Welcome, " + author;
         div.style.backgroundColor = "white";
         div.style.fontSize = "1.5em";
-        div.style.padding = "5px"
+        div.style.padding = "5px";
         div.style.borderBottom = "1px solid black";
         document.body.insertAdjacentElement("beforebegin", div);
       });
