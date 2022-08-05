@@ -23,7 +23,7 @@
         handler: ({ entry }) => {
           const author = JSON.parse(
             localStorage.getItem("netlify-cms-user")
-          ).name;
+          );
           console.log("author");
           console.log(author);
           return entry.get("data").set("author", author);

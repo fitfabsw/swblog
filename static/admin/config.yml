@@ -18,32 +18,38 @@ collections: # https://www.netlifycms.org/docs/configuration-options/#collection
     create: true
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     editor:
-      preview: false
+      preview: true
+    nested:
+      depth: 100
+      summary: '{{title}}'
     fields:
       - { label: '標題', name: 'title', widget: 'string' }
+      - { label: "AUTHOR", name: "author", widget: "string", default: '{{user.email}'}
+          #collection: "authors", 
+          #value_field: "name", 
+          ##default: '{{user.name}}',
+          #default: 'ADF',
+          #display_fields: [ "name" ], 
+          #search_fields: [ "name", "email" ] 
+        #}
       - { label: '發布日期', name: 'date', widget: 'datetime' }
-      - { label: '摘要', name: 'description', widget: 'string' }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true}
+      - { label: '摘要', name: 'description', widget: 'string', default: "ABCD111"}
       - { label: '內容', name: 'body', widget: 'markdown' }
       - { label: "標籤", name: "tags", widget: "list", required: false}
       - { label: "分類", name: "categories", widget: "list", required: false}
-  - name: "series"
-    label: "系列"
-    folder: "content/series"
+  - name: authors
+    label: Authors
+    folder: data/_authors/
+    media_folder: ''
+    public_folder: ''
+    format: json
     create: true
+    slug: "{{name}}"
     fields:
-      - {label: "標題", name: "title", widget: "string"}
-      - {label: "内容", name: "body", widget: "markdown", required: false}
-  - name: "categories"
-    label: "分類"
-    folder: "content/categories"
-    create: true
-    fields:
-      - {label: "標題", name: "title", widget: "string"}
-      - {label: "内容", name: "body", widget: "markdown", required: false}
-  - name: "tags"
-    label: "標籤"
-    folder: "content/tags"
-    create: true
-    fields:
-      - {label: "標題", name: "title", widget: "string"}
-      - {label: "内容", name: "body", widget: "markdown", required: false}
+      - { label: Name, name: name, widget: string }
+      - { label: Title, name: title, widget: string }
+      - { label: Email, name: email, widget: string }
+      - { label: Shortbio, name: shortbio, widget: text }
+      - { label: Image, name: authorimage, widget: image }
+
