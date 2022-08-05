@@ -17,7 +17,7 @@
     </script>
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
     <script>
-      const author;
+      let author = "before_login";
       if (window.netlifyIdentity) {
         console.log("AAA");
         window.netlifyIdentity.on("init", (user) => {
@@ -63,8 +63,6 @@
           }
           console.log("author");
           console.log(author);
-        } else {
-          author = "before_login";
         }
         CMS.init({
           config: {
