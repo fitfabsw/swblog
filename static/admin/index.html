@@ -17,29 +17,29 @@
     </script>
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
     <script>
+      if (window.netlifyIdentity) {
+        console.log("AAA");
+        window.netlifyIdentity.on("init", (user) => {
+          console.log("BBB");
+          console.log(user);
+          if (!user) {
+            console.log("CCC");
+            window.netlifyIdentity.on("", () => {
+              console.log("UUU");
+            });
+            window.netlifyIdentity.on("/", () => {
+              console.log("DDD");
+            });
+            window.netlifyIdentity.on("login", (user) => {
+              console.log("EEE");
+              console.log(user);
+            });
+          }
+        });
+      }
+
       document.addEventListener("DOMContentLoaded", function () {
         console.log("DOMContentLoaded!!!");
-
-        if (window.netlifyIdentity) {
-          console.log("AAA");
-          window.netlifyIdentity.on("init", (user) => {
-            console.log("BBB");
-            console.log(user);
-            if (!user) {
-              console.log("CCC");
-              window.netlifyIdentity.on("", () => {
-                console.log("UUU");
-              });
-              window.netlifyIdentity.on("/", () => {
-                console.log("DDD");
-              });
-              window.netlifyIdentity.on("login", (user) => {
-                console.log("EEE");
-                console.log(user);
-              });
-            }
-          });
-        }
 
         const author_info = JSON.parse(
           localStorage.getItem("netlify-cms-user")
