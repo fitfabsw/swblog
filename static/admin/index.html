@@ -1,39 +1,130 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>A static website</title>
+  <head>
+    <title>A static website</title>
 
-  <!-- include the widget -->
-  <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</head>
-<body>
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-  <script type="text/javascript" src="/js/my-cms.js"</script>
-  <!-- Add a menu:
+    <!-- include the widget -->
+    <script
+      type="text/javascript"
+      src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+    ></script>
+    <!--<script type="module" src="/js/my-cms.js"</script>-->
+    <link rel="shortcut icon" href="#" />
+  </head>
+  <body>
+    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <script>
+      console.log("DDJH");
+    </script>
+
+    <script>
+      CMS.registerEventListener({
+        name: "preSave",
+        handler: ({ entry }) => {
+          const author = JSON.parse(
+            localStorage.getItem("netlify-cms-user")
+          ).name;
+          console.log("author");
+          console.log(author);
+          return entry.get("data").set("author", author);
+        },
+      });
+      console.log("AAAD");
+      CMS.registerEditorComponent({
+        // Internal id of the component
+        id: "collapsible-note",
+        // Visible label
+        label: "Collapsible Note",
+        // Fields the user need to fill out when adding an instance of the component
+        fields: [
+          {
+            name: "summary",
+            label: "Summary",
+            widget: "string",
+          },
+          {
+            name: "details",
+            label: "Details",
+            widget: "markdown",
+          },
+        ],
+        // Regex pattern used to search for instances of this block in the markdown document.
+        // Patterns are run in a multline environment (against the entire markdown document),
+        // and so generally should make use of the multiline flag (`m`). If you need to capture
+        // newlines in your capturing groups, you can either use something like
+        // `([\S\s]*)`, or you can additionally enable the "dot all" flag (`s`),
+        // which will cause `(.*)` to match newlines as well.
+        //
+        // Additionally, it's recommended that you use non-greedy capturing groups (e.g.
+        // `(.*?)` vs `(.*)`), especially if matching against newline characters.
+        pattern:
+          /^<details>$\s*?<summary>(.*?)<\/summary>\n\n(.*?)\n^<\/details>$/ms,
+        // Given a RegExp Match object
+        // (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match#return_value),
+        // return an object with one property for each field defined in `fields`.
+        //
+        // This is used to populate the custom widget in the markdown editor in the CMS.
+        fromBlock: function (match) {
+          return {
+            summary: match[1],
+            detail: match[2],
+          };
+        },
+        // Given an object with one property for each field defined in `fields`,
+        // return the string you wish to be inserted into your markdown.
+        //
+        // This is used to serialize the data from the custom widget to the
+        // markdown document
+        toBlock: function (data) {
+          return `
+<details>
+  <summary>${data.summary}</summary>
+
+  ${data.detail}
+
+</details>
+`;
+        },
+        // Preview output for this component. Can either be a string or a React component
+        // (component gives better render performance)
+        toPreview: function (data) {
+          return `
+<details>
+  <summary>${data.summary}</summary>
+
+  ${data.detail}
+
+</details>
+`;
+        },
+      });
+    </script>
+    <!--<script src="/js/my-cms.js"</script>-->
+
+    <!-- Add a menu:
    Log in / Sign up - when the user is not logged in
    Username / Log out - when the user is logged in
   -->
-  <!--<div data-netlify-identity-menu></div>-->
+    <!--<div data-netlify-identity-menu></div>-->
 
-  <!-- Add a simpler button:
+    <!-- Add a simpler button:
     Simple button that will open the modal.
   -->
-  <!--<div data-netlify-identity-button>Login with Netlify Identity</div>-->
-</body>
+    <!--<div data-netlify-identity-button>Login with Netlify Identity</div>-->
+  </body>
 </html>
-
 
 <!--<!DOCTYPE html>-->
 <!--<html>-->
-  <!--<head>-->
-    <!--<meta charset="utf-8" />-->
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
-    <!--<title>Content Manager</title>-->
-    <!--[> Include the script that enables Netlify Identity on this page. <]-->
-    <!--<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>-->
-  <!--</head>-->
-  <!--<body>-->
-    <!--[> Include the script that builds the page and powers Netlify CMS <]-->
-    <!--<script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>-->
-  <!--</body>-->
+<!--<head>-->
+<!--<meta charset="utf-8" />-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
+<!--<title>Content Manager</title>-->
+<!--[> Include the script that enables Netlify Identity on this page. <]-->
+<!--<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--[> Include the script that builds the page and powers Netlify CMS <]-->
+<!--<script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>-->
+<!--</body>-->
 <!--</html>-->
