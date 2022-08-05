@@ -33,6 +33,9 @@
             window.netlifyIdentity.on("login", (user) => {
               console.log("EEE");
               console.log(user);
+              author = user.email.split("@")[0];
+              console.log("author");
+              console.log(author);
             });
           }
         });
