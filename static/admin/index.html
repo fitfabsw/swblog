@@ -14,11 +14,23 @@
   <body>
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
     <script>
-      const author = JSON.parse(
-        localStorage.getItem("netlify-cms-user")
-      ).name;
-      console.log("author");
-      console.log(author);
+      document.addEventListener("DOMContentLoaded", function () {
+        const author = JSON.parse(
+          localStorage.getItem("netlify-cms-user")
+        ).name;
+        console.log("author");
+        console.log(author);
+        const oldDiv = document.querySelectorAll("div#nc-root > div");
+        let div = document.createElement("div");
+        console.log("oldDiv");
+        console.log(oldDiv);
+        div.textContent = "Welcome, " + author;
+        div.style.backgroundColor = "white";
+        div.style.fontSize = "1.5em";
+        div.style.padding = "5px"
+        div.style.borderBottom = "1px solid black";
+        document.body.insertAdjacentElement("beforebegin", div);
+      });
     </script>
 
     <script>
