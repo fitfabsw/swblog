@@ -25,12 +25,6 @@
           console.log(user);
           if (!user) {
             console.log("CCC");
-            window.netlifyIdentity.on("", () => {
-              console.log("UUU");
-            });
-            window.netlifyIdentity.on("/", () => {
-              console.log("DDD");
-            });
             window.netlifyIdentity.on("login", (user) => {
               console.log("EEE");
               console.log(user);
@@ -142,14 +136,34 @@
                   },
                 ],
               },
+              {
+                name: "authors",
+                label: "Authors",
+                folder: "data/_authors",
+                media_folder: "",
+                public_folder: "",
+                format: "json",
+                create: true,
+                slug: "{{name}}",
+                fields: [
+                  { label: "Name", name: "name", widget: "string" },
+                  { label: "Title", name: "title", widget: "string" },
+                  { label: "Email", name: "email", widget: "string" },
+                  { label: "Shortbio", name: "shortbio", widget: "text" },
+                  { label: "Image", name: "authorimage", widget: "image" },
+                ],
+              },
             ],
           },
         });
 
         const oldDiv = document.querySelectorAll("div#nc-root > div");
+        var div1 = document.getElementsByClassName("e16dayda2")
         let div = document.createElement("div");
         console.log("oldDiv");
         console.log(oldDiv);
+        console.log("div1");
+        console.log(div1);
         if (author && author != "before_login") {
           div.textContent = "Welcome, " + author;
           div.style.backgroundColor = "white";
