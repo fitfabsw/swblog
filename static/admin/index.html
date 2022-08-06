@@ -34,7 +34,7 @@
               let div = document.createElement("div");
               div.textContent = "Welcome, " + author;
               div.style.backgroundColor = "white";
-              div.style.fontSize = "1.5em";
+              div.style.fontSize = "1.2em";
               div.style.padding = "5px";
               div.style.borderBottom = "1px solid black";
               document.body.insertAdjacentElement("beforebegin", div);
@@ -42,9 +42,9 @@
 
             window.netlifyIdentity.on("logout", (user) => {
               console.log("LOGOUT!");
-              var xxx = document.querySelector("#welcome-header");
-              console.log("xxx");
-              console.log(xxx);
+              //var xxx = document.querySelector("#welcome-header");
+              //console.log("xxx");
+              //console.log(xxx);
               if (window.localStorage) {
                 if (!localStorage.getItem("firstLoad")) {
                   localStorage["firstLoad"] = true;
@@ -173,7 +173,7 @@
           div.style.backgroundColor = "white";
           div.style.fontSize = "1.5em";
           div.style.padding = "5px";
-          div.style.borderBottom = "1px solid black";
+          div.style.borderBottom = "1px solid darkgrey";
           div.className = "welcome-header";
           div.id = "my-welcome-header";
           document.body.insertAdjacentElement("beforebegin", div);
