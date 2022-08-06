@@ -42,7 +42,7 @@
 
             window.netlifyIdentity.on("logout", (user) => {
               console.log("LOGOUT!");
-              var xxx = document.querySelector(".welcome-header");
+              var xxx = document.querySelector("#welcome-header");
               console.log("xxx");
               console.log(xxx);
               if (window.localStorage) {
@@ -175,6 +175,7 @@
           div.style.padding = "5px";
           div.style.borderBottom = "1px solid black";
           div.className = "welcome-header";
+          div.id = "my-welcome-header";
           document.body.insertAdjacentElement("beforebegin", div);
         }
       });
