@@ -42,6 +42,9 @@
 
             window.netlifyIdentity.on("logout", (user) => {
               console.log("LOGOUT!");
+              var xxx = document.querySelector(".welcome-header");
+              console.log("xxx");
+              console.log(xxx);
               if (window.localStorage) {
                 if (!localStorage.getItem("firstLoad")) {
                   localStorage["firstLoad"] = true;
@@ -159,8 +162,8 @@
         });
 
         const oldDiv = document.querySelectorAll("div#nc-root > div");
-        var div1 = document.getElementsByClassName("e16dayda2")
-        let div = document.createElement("div");
+        var div1 = document.getElementsByClassName("e16dayda2");
+        var div = document.createElement("div");
         console.log("oldDiv");
         console.log(oldDiv);
         console.log("div1");
@@ -171,6 +174,7 @@
           div.style.fontSize = "1.5em";
           div.style.padding = "5px";
           div.style.borderBottom = "1px solid black";
+          div.className = "welcome-header";
           document.body.insertAdjacentElement("beforebegin", div);
         }
       });
