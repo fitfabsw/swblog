@@ -5,7 +5,7 @@ ShowToc: true
 TocOpen: true
 tags: ["Raspberry Pi"]
 author: ["Kevin Lee"]
-draft: true
+draft: false
 ---
 
 ### 前言
