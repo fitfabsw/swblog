@@ -153,13 +153,33 @@ hostname: your_host_name
 ssh_pwauth: true
 
 ## Add users and groups to the system, and import keys with the ssh-import-id
+# Valid Values:
+#   name: The user's login name
+#   groups:  Optional. Additional groups to add the user to. Defaults to none
+#   lock_passwd: Defaults to true. Lock the password to disable password login
+#   passwd: The hash -- not the password itself -- of the password you want
+#   plain_text_passwd: The password in plain text
+#   sudo: Defaults to none. Accepts a sudo rule string, a list of sudo rule
+#         strings or False to explicitly deny sudo usage. Examples:
+#
+#         Allow a user unrestricted sudo access.
+#             sudo:  ALL=(ALL) NOPASSWD:ALL
+#
+#         Adding multiple sudo rule strings.
+#             sudo:
+#               - ALL=(ALL) NOPASSWD:/bin/mysql
+#               - ALL=(ALL) ALL
+#
+#         Prevent sudo access for a user.
+#             sudo: False
 users:
 - name: pi
   sudo: ALL=(ALL) NOPASSWD:ALL
   groups: users,adm,dialout,audio,netdev,video,plugdev,cdrom,games,input,gpio,spi,i2c,render,sudo
   lock_passwd: false
   shell: /bin/bash
-  passwd: raspberry
+  # passwd: $5$NK6pU2D7SF$uRhlS8RYM2fCwTg1ddpe6RyCdMpHP13/gTsPoLHMYj5
+  plain_text_passwd: raspberry
 
 ## Run arbitrary commands at rc.local like time
 runcmd:
@@ -173,7 +193,16 @@ power_state:
 ### 4. 第一次登入
 完成上一步後，重啟raspberry pi，使用以下指令，等其連上區網並確定其IP。這個過程要2~5分鐘，有時甚至要再次重啟。
 ```bash
-nmap -sn 172.20.10.1/24
+> sudo nmap -sn 172.20.10.1/24
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-02-01 16:35 CST
+Nmap scan report for 172.20.10.1
+Host is up (0.021s latency).
+MAC Address: 46:90:BB:61:ED:64 (Unknown)
+Nmap scan report for 172.20.10.3
+Host is up (0.22s latency).
+MAC Address: E4:5F:01:D9:28:06 (Raspberry Pi Trading)
+Nmap scan report for 172.20.10.4
+Host is up.
 ```
 找出其IP (ex: 172.20.10.3) 後，使用以下指令ssh登入
 ```bash
