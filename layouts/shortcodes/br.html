@@ -1,0 +1,18 @@
+{{- $msg := "The optional argument passed to the %s shortcode must be an integer greater than or equal to zero. See %s" -}}
+{{- if ne 0 (.Get 0) -}}
+  {{- with .Get 0 -}}
+    {{- if eq (printf "%T" .) "int" -}}
+      {{- if lt . 0 -}}
+        {{- errorf $msg $.Name $.Position -}}
+      {{- else -}}
+        {{- range seq 1 . -}}
+          <br>
+        {{- end -}}
+      {{- end -}}
+    {{- else -}}
+      {{- errorf $msg $.Name $.Position -}}
+    {{- end -}}
+  {{- else -}}
+    <br>
+  {{- end -}}
+{{- end -}}

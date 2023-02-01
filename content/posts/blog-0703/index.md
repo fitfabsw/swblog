@@ -7,7 +7,7 @@ ShowToc: true
 TocOpen: true
 aliases: ["/this-is-an-aliase"]
 tags: ["旅遊"]
-author: "Tom Chen"
+author: ["Kevin Lee", "路人甲"]
 cover:
   image: gallery/posts-2021-07-03-A/IMG_7603.jpg
   alt: dummy alt
@@ -94,6 +94,17 @@ here are some examples {{< awesome fa-brands fa-cc-jcb >}}{{< awesome fa-brands 
 {{</* youtube embed="VQraviuwbzU" */>}}
 ```
 {{< youtube embed="VQraviuwbzU" >}}
+
+
+### 空行
+```
+paragraph1
+{{</* br 3 */>}}
+paragraph2
+```
+paragraph1
+{{< br 3 >}}
+paragraph2
 
 
 ## 讓寫文章變得有趣:heart:
