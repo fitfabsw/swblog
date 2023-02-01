@@ -207,3 +207,5 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub pi@your_host_name.local
 
 ### Reference
 1. https://www.youtube.com/watch?v=IW_6EEAyXGs
+2. [Install Ubuntu 20.04 on Raspberry Pi 4 (without monitor)](https://roboticsbackend.com/install-ubuntu-on-raspberry-pi-without-monitor/)
+3. [How to Set up WiFi on Your Raspberry Pi Without a Monitor (Headless)](https://howchoo.com/g/ndy1zte2yjn/how-to-set-up-wifi-on-your-raspberry-pi-without-ethernet)
