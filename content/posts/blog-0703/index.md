@@ -103,7 +103,8 @@ here are some examples {{< awesome fa-brands fa-cc-jcb >}}{{< awesome fa-brands 
 苦風金斥。尤位我多由立空里己告肖飽蝴哪月帽、包干丁旦細活，浪她年或視包吧土主學耳過坡呢。美肖旁信三荷。
 
 **Collapsed gallery**
-{{</* gallery dir=gallery/posts-2021-07-03-B /*/>}}
+{{< gallery dir=gallery/posts-2021-07-03-B />}}
+
 {{< /details >}}
 
 ### Youtube影片
