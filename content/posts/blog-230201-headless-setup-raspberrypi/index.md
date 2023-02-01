@@ -216,7 +216,108 @@ _in raspberry pi_
 ```bash
 sudo apt update
 sudo apt install avahi-daemon
+sudo systemtl restart avahi-daemon
 ```
+{{< details `若過程中出現Waiting for cache lock錯誤，使用kill將佔用的process砍掉即可` >}}
+```bash
+$ sudo apt update; sudo apt install avahi-daemon
+Hit:1 http://ports.ubuntu.com/ubuntu-ports focal InRelease
+Hit:2 http://ports.ubuntu.com/ubuntu-ports focal-updates InRelease
+Hit:3 http://ports.ubuntu.com/ubuntu-ports focal-backports InRelease
+Hit:4 http://ports.ubuntu.com/ubuntu-ports focal-security InRelease
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+100 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 1699 (unattended-upgr)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 1699 (unattended-upgr)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 1699 (unattended-upgr)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 1699 (unattended-upgr)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 1699 (unattended-upgr)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 1699 (unattended-upgr)
+^Citing for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 1699 (unattended-upgr)... 6s
+
+$ sudo kill -9 1699
+$ sudo apt update; sudo apt install avahi-daemon
+Hit:1 http://ports.ubuntu.com/ubuntu-ports focal InRelease
+Hit:2 http://ports.ubuntu.com/ubuntu-ports focal-updates InRelease
+Hit:3 http://ports.ubuntu.com/ubuntu-ports focal-backports InRelease
+Hit:4 http://ports.ubuntu.com/ubuntu-ports focal-security InRelease
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+100 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 2458 (unattended-upgr)
+^Citing for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 2458 (unattended-upgr)... 1s
+
+$ sudo kill -9 2458
+$ sudo apt update; sudo apt install avahi-daemon
+Hit:1 http://ports.ubuntu.com/ubuntu-ports focal InRelease
+Hit:2 http://ports.ubuntu.com/ubuntu-ports focal-updates InRelease
+Hit:3 http://ports.ubuntu.com/ubuntu-ports focal-backports InRelease
+Hit:4 http://ports.ubuntu.com/ubuntu-ports focal-security InRelease
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+100 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  libavahi-common-data libavahi-common3 libavahi-core7 libdaemon0 libnss-mdns
+Suggested packages:
+  avahi-autoipd avahi-autoipd | zeroconf
+The following NEW packages will be installed:
+  avahi-daemon libavahi-common-data libavahi-common3 libavahi-core7 libdaemon0 libnss-mdns
+0 upgraded, 6 newly installed, 0 to remove and 100 not upgraded.
+Need to get 209 kB of archives.
+After this operation, 948 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://ports.ubuntu.com/ubuntu-ports focal-updates/main arm64 libavahi-common-data arm64 0.7-4ubuntu7.1 [21.4 kB]
+Get:2 http://ports.ubuntu.com/ubuntu-ports focal-updates/main arm64 libavahi-common3 arm64 0.7-4ubuntu7.1 [20.4 kB]
+Get:3 http://ports.ubuntu.com/ubuntu-ports focal-updates/main arm64 libavahi-core7 arm64 0.7-4ubuntu7.1 [73.2 kB]
+Get:4 http://ports.ubuntu.com/ubuntu-ports focal/main arm64 libdaemon0 arm64 0.14-7 [12.8 kB]
+Get:5 http://ports.ubuntu.com/ubuntu-ports focal-updates/main arm64 avahi-daemon arm64 0.7-4ubuntu7.1 [58.0 kB]
+Get:6 http://ports.ubuntu.com/ubuntu-ports focal/main arm64 libnss-mdns arm64 0.14.1-1ubuntu1 [23.2 kB]
+Fetched 209 kB in 2s (85.0 kB/s)
+Selecting previously unselected package libavahi-common-data:arm64.
+(Reading database ... 67612 files and directories currently installed.)
+Preparing to unpack .../0-libavahi-common-data_0.7-4ubuntu7.1_arm64.deb ...
+Unpacking libavahi-common-data:arm64 (0.7-4ubuntu7.1) ...
+Selecting previously unselected package libavahi-common3:arm64.
+Preparing to unpack .../1-libavahi-common3_0.7-4ubuntu7.1_arm64.deb ...
+Unpacking libavahi-common3:arm64 (0.7-4ubuntu7.1) ...
+Selecting previously unselected package libavahi-core7:arm64.
+Preparing to unpack .../2-libavahi-core7_0.7-4ubuntu7.1_arm64.deb ...
+Unpacking libavahi-core7:arm64 (0.7-4ubuntu7.1) ...
+Selecting previously unselected package libdaemon0:arm64.
+Preparing to unpack .../3-libdaemon0_0.14-7_arm64.deb ...
+Unpacking libdaemon0:arm64 (0.14-7) ...
+Selecting previously unselected package avahi-daemon.
+Preparing to unpack .../4-avahi-daemon_0.7-4ubuntu7.1_arm64.deb ...
+Unpacking avahi-daemon (0.7-4ubuntu7.1) ...
+Selecting previously unselected package libnss-mdns:arm64.
+Preparing to unpack .../5-libnss-mdns_0.14.1-1ubuntu1_arm64.deb ...
+Unpacking libnss-mdns:arm64 (0.14.1-1ubuntu1) ...
+Setting up libavahi-common-data:arm64 (0.7-4ubuntu7.1) ...
+Setting up libdaemon0:arm64 (0.14-7) ...
+Setting up libavahi-common3:arm64 (0.7-4ubuntu7.1) ...
+Setting up libavahi-core7:arm64 (0.7-4ubuntu7.1) ...
+Setting up avahi-daemon (0.7-4ubuntu7.1) ...
+Created symlink /etc/systemd/system/dbus-org.freedesktop.Avahi.service → /lib/systemd/system/avahi-daemon.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/avahi-daemon.service → /lib/systemd/system/avahi-daemon.service.
+Created symlink /etc/systemd/system/sockets.target.wants/avahi-daemon.socket → /lib/systemd/system/avahi-daemon.socket.
+Setting up libnss-mdns:arm64 (0.14.1-1ubuntu1) ...
+First installation detected...
+Checking NSS setup...
+Processing triggers for systemd (245.4-4ubuntu3.17) ...
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for dbus (1.12.16-2ubuntu2.2) ...
+Processing triggers for libc-bin (2.31-0ubuntu9.9) ...
+```
+{{< /details >}}
+
+{{< br >}}
 _in host_
 ```bash
 ping your_host_name.local
