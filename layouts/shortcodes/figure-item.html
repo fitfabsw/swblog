@@ -1,0 +1,14 @@
+<!-- reference: https://discourse.gohugo.io/t/shortcode-and-nested-shortcodes-with-variables/2874 -->
+<style>
+.img-item{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+</style>
+
+<div>
+  <p>{{ .Get 1 }}</p>
+  <img class="img-item" src="{{ .Get 0 }}" >
+</div>
+

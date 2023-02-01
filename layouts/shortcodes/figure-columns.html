@@ -1,0 +1,18 @@
+<!-- reference: https://discourse.gohugo.io/t/shortcode-and-nested-shortcodes-with-variables/2874 -->
+<style>
+.image-columns {
+    display: grid;
+    gap: 0.5em;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    overflow: hidden;
+    min-width:0;
+    width: {{ .Get 0 | default "100%" }};
+}
+</style>
+
+{{- $children := split .Inner "--break-me-here--" -}}
+<div class="image-columns">
+    {{- index $children 0 | safeHTML -}}
+</div>
+

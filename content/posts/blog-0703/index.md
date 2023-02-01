@@ -51,16 +51,32 @@ This is a footnote.[^1]
 
 
 ## Shortcodes
-### 圖片: figure
-使用shortcode figure顯示單張照片
+### 圖片
+> 使用shortcode `figure`顯示單張照片
 ```
 {{</* figure src="IMG_7000.jpg" */>}}
 ```
 {{< figure src="IMG_7000.jpg" alt="SDF">}}
 
-### 圖庫: gallery
-* 使用shortcode gallery顯示照片群組，可放大滑動瀏覽。
-  注意圖片須放在/static/gallery/中。
+### 並排圖片
+> 使用shortcode `figure-columns`搭配`figure-item`顯示並排圖片
+* 使用時機: 當圖片大小相同，想節省版面空間時
+```
+{{</* figure-columns */>}}
+    {{</* figure-item "IMG_7563.jpg" */>}}
+    {{</* figure-item "IMG_7680.jpg" */>}}
+    {{</* figure-item "IMG_8634.jpg" */>}}
+{{</* /figure-columns */>}}
+```
+{{< figure-columns >}}
+    {{< figure-item "IMG_7563.jpg" >}}
+    {{< figure-item "IMG_7680.jpg" >}}
+    {{< figure-item "IMG_8634.jpg" >}}
+{{< /figure-columns >}}
+
+### 圖庫
+> 使用shortcode `gallery`搭配`load-photoswipe`顯示照片群組，可放大滑動瀏覽。
+* 注意圖片須放在/static/gallery/中。
 * 結尾需再放置一個特殊的shortcode load-photoswipe，一篇文章中可以有多個gallery，但僅需有一個load-photoswipe
 ```
 {{</* gallery dir=gallery/posts-2021-07-03-A /*/>}}
@@ -70,14 +86,16 @@ This is a footnote.[^1]
 {{< gallery dir="gallery/posts-2021-07-03-A" />}}
 {{< load-photoswipe >}}
 
-### 圖示: awesome
-使用shortcode awesome顯示awesome font
+### 圖示
+> 使用shortcode `awesome`顯示awesome font
 
 * {{< awesome fa-solid fa-cake-candles >}}
 here are some examples {{< awesome fa-brands fa-cc-jcb >}}{{< awesome fa-brands fa-docker >}}{{< awesome fa-solid fa-face-kiss-wink-heart >}}
 
 
-### 折疊: details
+### 折疊
+> 使用shortcode `details`折疊區塊
+
 {{< details  這是一段可以摺疊的區塊 >}}
 **Collapsed text**
 
@@ -85,18 +103,19 @@ here are some examples {{< awesome fa-brands fa-cc-jcb >}}{{< awesome fa-brands 
 苦風金斥。尤位我多由立空里己告肖飽蝴哪月帽、包干丁旦細活，浪她年或視包吧土主學耳過坡呢。美肖旁信三荷。
 
 **Collapsed gallery**
-{{</* gallery dir=gallery/posts-2021-07-03-A /*/>}}
+{{</* gallery dir=gallery/posts-2021-07-03-B /*/>}}
 {{< /details >}}
 
-### Youtube影片: youtube
-* 使用shortcode youtube顯示youtube影片
+### Youtube影片
+> 使用shortcode `youtube`顯示youtube影片
 ```
 {{</* youtube embed="VQraviuwbzU" */>}}
 ```
 {{< youtube embed="VQraviuwbzU" >}}
 
 
-### 空行: br
+### 空行
+> 使用shortcode `br`空行
 ```
 paragraph1
 {{</* br 3 */>}}
