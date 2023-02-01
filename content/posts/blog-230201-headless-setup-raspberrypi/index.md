@@ -142,7 +142,9 @@ network:
 * 修改 /boot/firmware/user-data
 
 此檔案可直接設定user和hostname，hostname和avahi-daemon搭配，方邊後續登入。
-其為ubuntu提供的cloud-init的一部分，細節可參考[cloud-init doc](https://cloudinit.readthedocs.io/en/latest/reference/examples.html#)
+其為ubuntu提供的cloud-init的一部分，細節可參考
+[[cloud-init doc]](https://cloudinit.readthedocs.io/en/latest/reference/examples.html#)
+[[Red Hat Linux Config Guide ch3]](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html/installation_and_configuration_guide/setting_up_cloud_init)
 ```
 #cloud-config
 
