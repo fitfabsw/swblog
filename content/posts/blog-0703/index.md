@@ -88,7 +88,7 @@ here are some examples {{< awesome fa-brands fa-cc-jcb >}}{{< awesome fa-brands 
 {{</* gallery dir=gallery/posts-2021-07-03-A /*/>}}
 {{< /details >}}
 
-### Youtube影片
+### Youtube影片: youtube
 * 使用shortcode youtube顯示youtube影片
 ```
 {{</* youtube embed="VQraviuwbzU" */>}}
@@ -96,7 +96,7 @@ here are some examples {{< awesome fa-brands fa-cc-jcb >}}{{< awesome fa-brands 
 {{< youtube embed="VQraviuwbzU" >}}
 
 
-### 空行
+### 空行: br
 ```
 paragraph1
 {{</* br 3 */>}}
