@@ -60,12 +60,6 @@ draft: true
 {{< /details >}}
 {{< details `dh -h` >}}
 ```bash
-/dev/disk2 (external, physical):
-   #:                       TYPE NAME                    SIZE       IDENTIFIER
-   0:     FDisk_partition_scheme                        *31.9 GB    disk2
-   1:             Windows_FAT_32 ⁨system-boot⁩             268.4 MB   disk2s1
-   2:                      Linux ⁨⁩                        31.7 GB    disk2s2
-
 ~ ❯ df -h
 Filesystem       Size   Used  Avail Capacity iused      ifree %iused  Mounted on
 /dev/disk1s1s1  1.8Ti   14Gi  537Gi     3%  502068 4291231305    0%   /
@@ -178,11 +172,11 @@ power_state:
 
 ### 4. 第一次登入
 完成上一步後，重啟raspberry pi，使用以下指令，等其連上區網並確定其IP。這個過程要2~5分鐘，有時甚至要再次重啟。
-```
+```bash
 nmap -sn 172.20.10.1/24
 ```
 找出其IP (ex: 172.20.10.3) 後，使用以下指令ssh登入
-```
+```bash
 ssh pi@172.20.10.3
 ```
 
@@ -190,18 +184,18 @@ ssh pi@172.20.10.3
 * 利用avahi-daemon，可以使用.local網域直接登入而不需使用IP
 
 _in raspberry pi_
-```
+```bash
 sudo apt update
 sudo apt install avahi-daemon
 ```
 _in host_
-```
+```bash
 ping your_host_name.local
 ssh pi@your_host_name.local
 ```
 ### 6. 免密碼ssh登入
 * 使用ssh-copy-id，可以免去每次ssh使用密碼登入
-```
+```bash
 # 這邊需準備一對金鑰，假設其路徑為~/.ssh/id_rsa.pub
 ssh-copy-id -i ~/.ssh/id_rsa.pub pi@your_host_name.local
 ```
