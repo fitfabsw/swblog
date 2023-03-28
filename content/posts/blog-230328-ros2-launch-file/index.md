@@ -15,7 +15,7 @@ xxx
 
 ### 1. 創建一個最簡單的 launch 檔案
 
-假設已存在 package 名稱為 my_tutorials，先創建一個 launch 資料夾，並在裡面創建一個名為 demo.launch.py 的檔案。
+假設已存在名為 my_tutorials 的 package，先創建一個 launch 資料夾，並在裡面創建一個名為 demo.launch.py 的檔案。
 
 ```bash
 my_tutorials
@@ -31,6 +31,7 @@ my_tutorials
 #### generate_launch_description 函數
 
 任何 launch 檔，都須定義一個 generate_launch_description 函數，並回傳一個 LaunchDescription 物件。
+在此例中，我們定義一個Node物件，並加入至LaunchDescription的初始化函數中
 
 ```python
 from launch import LaunchDescription
@@ -43,6 +44,54 @@ def generate_launch_description():
             executable='turtlesim_node',
         ),
     ])
+```
+
+#### 修改 CMakelist.txt
+
+如果 package 是 C++ 的話，還需要在 CMakeLists.txt 中加入以下內容，以便將 launch 檔案安裝至系統中。
+
+```cmake
+install(DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}
+)
+```
+
+#### 修改 setup.py
+
+如果 package 是 python 的話，則需要修改 setup.py 中 data_files 內容，加上
+`(f"share/{package_name}/launch", glob("launch/*.launch.py"))`
+
+```python
+from setuptools import setup
+from glob import glob
+
+package_name = "my_tutorials"
+
+setup(
+    name=package_name,
+    version="0.0.0",
+    packages=[package_name],
+    data_files=[
+        ("share/ament_index/resource_index/packages", ["resource/" + package_name]),
+        ("share/" + package_name, ["package.xml"]),
+        (f"share/{package_name}/launch", glob("launch/*.launch.py")),
+    ],
+    ...
+)
+```
+
+#### 編譯執行
+
+使用 colcon 進行編譯
+
+```bash
+$ colcon build --packages-select my_tutorials
+```
+
+執行 launch 檔
+
+```bash
+$ ros2 launch my_tutorials demo.launch.py
 ```
 
 以上的 launch 檔案，等同於以下的指令：
@@ -92,7 +141,7 @@ $ ros2 node list
 
 ### 2. 包含多個 Node
 
-定義多個Node也很容易
+定義多個 Node 也很容易
 
 ```python
 from launch import LaunchDescription
