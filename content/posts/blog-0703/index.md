@@ -1,5 +1,5 @@
 ---
-title: "部落格文章"
+title: "文章範例"
 summary: 這是此篇文章的總結
 draft: false
 date: 2022-07-03

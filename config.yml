@@ -1,6 +1,6 @@
 #baseURL: "https://adityatelange.github.io/" # if your site is in 'https', then make sure your base url isn't written using 'http' otherwise your sitemap would contain http (as opposeed to https) URLs. This would affect Google indexing of your URLs.
 baseURL: "/"
-title: MyExampleBlog
+title: CPD軟體部落
 paginate: 8
 #theme: PaperMod
 
@@ -80,11 +80,11 @@ params:
               url: tags
 
     homeInfoParams:
-        Title: "部落生活"
+        Title: "CPD軟體部落"
         Content: >
-            *記錄生活點滴*
+            *記錄工作點滴*
 
-            - ## **程式**。**雜記**。**隨筆**
+            - ## **程式**。**方法論**。**個人專案**。**And More**
 
     #socialIcons:
         #- name: github
