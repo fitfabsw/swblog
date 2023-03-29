@@ -6,16 +6,15 @@ ShowToc: true
 TocOpen: true
 tags: ["ROS2"]
 author: ["Kevin Lee"]
-draft: true
+draft: false
 ---
 
 ### 前言
 
-聽起來不錯？那我們開始吧！
+DeclareLaunchArgument 和 LaunchConfiguration 在設計上有不同的目的，它們通常一起使用以實現靈活且可讀的 launch 文件。讓我們來看看它們的作用以及為什麼需要一起使用它們。
 
 ### 1. 參數好搭擋
 
-DeclareLaunchArgument 和 LaunchConfiguration 在設計上有不同的目的，它們通常一起使用以實現靈活且可讀的 launch 文件。讓我們來看看它們的作用以及為什麼需要一起使用它們。
 
 - DeclareLaunchArgument：它的主要目的是在 launch 文件中定義一個命令行參數，用於讓使用者在啟動 launch 文件時指定某些參數值。DeclareLaunchArgument 還允許你為這些命令行參數設置默認值，以便在使用者未指定值時使用。
 
@@ -195,6 +194,7 @@ def generate_launch_description():
     ld.add_action(min_launch)
     return ld
 ```
+
 - min.launch.py
 
 ```python
@@ -238,7 +238,7 @@ launch_arguments 參數可以傳入一個字典，或是一個由 (key, value) �
 
   launch_arguments 是一個字典，其鍵值對應於參數名稱和參數值。這種寫法和第一種情況是等效的。
 
-### 4. 隱式參數傳遞
+### 4. 特殊狀況: 隱式參數傳遞
 
 即使沒定義 DeclareLaunchArgument 和 LaunchConfiguration，在啟動 launch 文件時帶上參數，還是可以傳遞給子 launch 文件。
 
@@ -294,18 +294,21 @@ Arguments (pass arguments as '<name>:=<value>'):
 所以在撰寫 launch 文件時，應養成良好習慣，將所有需要用到的參數都定義在 launch 文件中。
 意即使用 DeclareLaunchArgument 定義所有需要用到的參數。
 
-### 5. 僅定義 DecalreLaunchArgument
+### 5. 特殊狀況: 僅定義 DecalreLaunchArgument
+
+讓我們來看一些特殊狀況，當 launch 文件中只定義了 DeclareLaunchArgument，但沒有使用 LaunchConfiguration，這樣的 launch 文件會發生什麼事情呢？
+因為沒有定義 LaunchCongiruation，所以無法傳遞參數值給子節點。
+故這裡定義一個 demo_DeclareLaunchArgument_only.launch.py，僅包含一個子 launch 文件，即前例的 min.launch.py
+
+- demo_DeclareLaunchArgument_only.launch.py
 
 ```python
 import os
-
 from launch.launch_description import DeclareLaunchArgument, LaunchDescription
 from launch_ros.actions import Node
-
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from ament_index_python.packages import get_package_share_directory
-
 
 def generate_launch_description():
     node_name_arg = DeclareLaunchArgument("node_name", default_value="my_talker")
@@ -319,41 +322,63 @@ def generate_launch_description():
             )
         )
     )
-    talker_node = Node(
-        package="demo_nodes_cpp",
-        executable="talker",
-    )
     ld = LaunchDescription()
     ld.add_action(node_name_arg)
     ld.add_action(min_demo1)
-    ld.add_action(talker_node)
     return ld
 ```
 
 ```bash
+$ ros2 launch my_ros2_tutorials demo_DeclareLaunchArgument_only.launch.py
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [launch.user]: width: 20
+
 $ ros2 launch my_ros2_tutorials demo_DeclareLaunchArgument_only.launch.py width:=33
 [INFO] [launch]: Default logging verbosity is set to INFO
 [INFO] [launch.user]: width: 33
-[INFO] [talker-1]: process started with pid [834635]
-[talker-1] [INFO] [1680063960.490802713] [talker]: Publishing: 'Hello World: 1'
-[talker-1] [INFO] [1680063961.490619321] [talker]: Publishing: 'Hello World: 2'
-[talker-1] [INFO] [1680063962.494913624] [talker]: Publishing: 'Hello World: 3'
 ```
 
 #### 使用場合
 
-當此參數不需要傳值給內部的 Node 時，僅需要傳給內部其他的 launch 文件時
+顯然，此結果和第三節相同。但是不需定義 launch_argument，可以少點程式碼。
+那要用哪種方式呢? 目前，我暫時沒有結論，但看起來沒有特別的壞處，保留給讀者自行決定吧 😆
 
-### 6. 僅定義 LoadLaunchArgument
+### 6. 特殊狀況: 僅定義 LoadLaunchArgument
 
-如果我們把上述 pass_to_child_node.launch.py 中的兩行註解掉，
+這也是一種特殊狀況，當 launch 文件中只定義了 LaunchConfiguration，這樣的 launch 文件會發生什麼事情呢？
 
-```python
-    # node_name_arg = DeclareLaunchArgument("node_name", default_value="my_talker")
-    # node_name = LaunchConfiguration("node_name")
-    node_name = LaunchConfiguration("node_name", default="my_talker")
-```
+基本上，綜合以上各節，我們應該也可以推斷出結果了。
+原則上，父 launch 文件的參數，都可傳遞給子節點和子 launch 文件，但是容易誤導別的使用者。
+
+#### 使用場合
+
+原則上要儘量避免，但要可以讀懂別人的這種寫法。
 
 ### 7. 結論
 
-xxx
+在 ROS2 的 launch 文件中，DeclareLaunchArgument 和 LaunchConfiguration 是兩個常用的元素。
+DeclareLaunchArgument 用於在 launch 文件中定義命令行參數，並可以為參數設置默認值。
+LaunchConfiguration 用於引用先前使用 DeclareLaunchArgument 定義的命令行參數。透過這兩個元素的搭配使用，可以讓 launch 文件更靈活、具有可讀性，避免錯誤。
+
+- 使用 LogInfo 可以檢查傳入的 Launch 文件的參數值，並在執行 Launch 過程中顯示在控制台上。
+
+- 針對要傳值的參數，必定使用 DeclareLaunchArgument 定義，以確保 Launch 文件的可讀性和可維護性。
+
+- 本文介紹了三種特殊情況，建議在實際應用中謹慎使用與理解。
+
+最後，總結下可能碰到的狀況，與建議的寫法
+
+- 僅需傳參給子 Node
+
+  DeclareLaunchArgument 和 LaunchConfiguration 兩者皆需定義
+
+- 僅需傳參給子 Launch 文件
+
+  以下兩種寫法皆OK
+
+  - 僅定義 DeclareLaunchArgument
+  - DeclareLaunchArgument 和 LaunchConfiguration 兩者皆定義
+
+- 僅需傳參給子 Node 和子 Launch 文件
+
+  DeclareLaunchArgument 和 LaunchConfiguration 兩者皆需定義
