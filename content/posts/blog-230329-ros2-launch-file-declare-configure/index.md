@@ -84,7 +84,7 @@ $ ros2 run demo_nodes_cpp talker --ros-args --remap __node:=changed_talker
 #### 查看 launch 文件參數
 
 我們可以使用 `ros2 launch package_name launch_file.launch.py -s` 在指令列查看 launch 文件的參數，如下所示。
-這主要是透過 DecalreLaunchArgument 定義的。
+這主要是透過 DeclareLaunchArgument 定義的。
 
 ```bash
 $ ros2 launch my_ros2_tutorials pass_to_child_node.launch.py -s
@@ -294,10 +294,10 @@ Arguments (pass arguments as '<name>:=<value>'):
 所以在撰寫 launch 文件時，應養成良好習慣，將所有需要用到的參數都定義在 launch 文件中。
 意即使用 DeclareLaunchArgument 定義所有需要用到的參數。
 
-### 5. 特殊狀況: 僅定義 DecalreLaunchArgument
+### 5. 特殊狀況: 僅定義 DeclareLaunchArgument
 
 讓我們來看一些特殊狀況，當 launch 文件中只定義了 DeclareLaunchArgument，但沒有使用 LaunchConfiguration，這樣的 launch 文件會發生什麼事情呢？
-因為沒有定義 LaunchCongiruation，所以無法傳遞參數值給子節點。
+因為沒有定義 LaunchConfiguration，所以無法傳遞參數值給子節點。
 故這裡定義一個 demo_DeclareLaunchArgument_only.launch.py，僅包含一個子 launch 文件，即前例的 min.launch.py
 
 - demo_DeclareLaunchArgument_only.launch.py
