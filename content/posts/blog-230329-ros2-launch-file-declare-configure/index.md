@@ -25,7 +25,9 @@ DeclareLaunchArgument 和 LaunchConfiguration 在設計上有不同的目的，�
 
 當你需要在不同的 Node 之間共享一個參數，或者想要在啟動 launch 文件時允許使用者指定某些參數值時，使用 DeclareLaunchArgument 和 LaunchConfiguration 是有意義的。這使得 launch 文件更靈活、更具可讀性，並有助於避免錯誤。
 
-底下我們定義一個 demo4.launch.py，並觀察啟動時有無帶參數，對節點行為的影響。
+底下我們定義一個 pass_to_child_node.launch.py，並觀察啟動時有無帶參數，對節點行為的影響。
+
+- pass_to_child_node.launch.py
 
 ```python
 from launch.launch_description import DeclareLaunchArgument, LaunchDescription
@@ -49,7 +51,7 @@ def generate_launch_description():
 - 執行 launch 文件不帶參數
 
 ```bash
-$ ros2 launch my_ros2_tutorials demo4.launch.py
+$ ros2 launch my_ros2_tutorials pass_to_child_node.launch.py
 [INFO] [talker-1]: process started with pid [751246]
 [talker-1] [INFO] [1680054713.365480642] [my_talker]: Publishing: 'Hello World: 1'
 [talker-1] [INFO] [1680054714.364295786] [my_talker]: Publishing: 'Hello World: 2'
@@ -62,7 +64,7 @@ $ ros2 node list
 - 執行 launch 文件帶參數
 
 ```bash
-$ ros2 launch my_ros2_tutorials demo4.launch.py node_name:=changed_talker
+$ ros2 launch my_ros2_tutorials pass_to_child_node.launch.py node_name:=changed_talker
 [INFO] [talker-1]: process started with pid [751246]
 [talker-1] [INFO] [1680054713.365480642] [my_talker]: Publishing: 'Hello World: 1'
 [talker-1] [INFO] [1680054714.364295786] [my_talker]: Publishing: 'Hello World: 2'
@@ -73,7 +75,7 @@ $ ros2 node list
 ```
 
 在此 launch 文件中，我們啟動了一個在官方 package demo_nodes_cpp 下的執行檔，talker，
-並且透過 demo4.launch.py 的參數，改變節點的行為。在此是舉改變節點的名稱為例。
+並且透過 pass_to_child_node.launch.py 的參數，改變節點的行為。在此是舉改變節點的名稱為例。
 這也相當於執行下列的指令。
 
 ```bash
@@ -86,7 +88,7 @@ $ ros2 run demo_nodes_cpp talker --ros-args --remap __node:=changed_talker
 這主要是透過 DecalreLaunchArgument 定義的。
 
 ```bash
-$ ros2 launch my_ros2_tutorials demo4.launch.py -s
+$ ros2 launch my_ros2_tutorials pass_to_child_node.launch.py -s
 Arguments (pass arguments as '<name>:=<value>'):
 
     'node_name':
@@ -156,15 +158,93 @@ $ ros2 launch my_ros2_tutorials log_argument.launch.py
 
 這些參數會被轉換為一個訊息字串，並在執行 Launch 過程中顯示在控制台上。
 
-### 3. 隱式參數傳遞
+### 3. 傳遞參數給子 launch 文件
 
-即使沒定義 DeclareLaunchArgument 和 LaunchConfiguration，在啟動 launch 文件時帶上參數，
-還是可以傳遞到內部其他的 launch 文件。
+我們定義參數，目的是要傳遞給子節點或子 launch 文件。子節點的狀況已在第一節說明過了，即 pass_to_child_node.launch.py 的範例。
+這裡我們來看看如何傳遞參數給子 launch 文件。
 
-底下我們用一個簡單範例講解此概念，分別定義 min.launch.py 和 demo5.launch.py。
-其中 min.launch.py 是 demo5.launch.py 的子 launch 文件。
+底下我們用一個簡單範例講解此概念，分別定義 min.launch.py 和 pass_to_child_launch.launch.py。
+其中 min.launch.py 是 pass_to_child_launch.launch.py 的子 launch 文件。
 
-- demo5.launch.py
+- pass_to_child_launch.launch.py
+
+```python
+import os
+from launch.launch_description import LaunchDescription
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from ament_index_python.packages import get_package_share_directory
+from launch.actions import DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration
+
+def generate_launch_description():
+    width_arg = DeclareLaunchArgument("width", default_value="10")
+    min_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(
+                get_package_share_directory("my_ros2_tutorials"),
+                "launch",
+                "min.launch.py",
+            ),
+        ),
+        launch_arguments=[("width", LaunchConfiguration("width"))]
+        # launch_arguments={"width": LaunchConfiguration("width")}.items(),
+    )
+    ld = LaunchDescription()
+    ld.add_action(width_arg)
+    ld.add_action(min_launch)
+    return ld
+```
+- min.launch.py
+
+```python
+from launch.launch_description import DeclareLaunchArgument, LaunchDescription
+from launch.substitutions import LaunchConfiguration
+from launch.actions import LogInfo
+
+def generate_launch_description():
+    width_arg = DeclareLaunchArgument("width", default_value="20")
+    ld = LaunchDescription(
+        [
+            width_arg,
+            LogInfo(msg=["width: ", LaunchConfiguration("width")]),
+        ]
+    )
+    return ld
+```
+
+執行 launch 文件，可以看到子 launch 文件的參數值被正確傳遞。
+
+```bash
+# 執行 launch 文件不帶參數
+$ ros2 launch my_ros2_tutorials pass_to_child_launch.launch.py
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [launch.user]: width: 10
+
+# 執行 launch 文件帶參數
+$ ros2 launch my_ros2_tutorials pass_to_child_launch.launch.py width:=123
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [launch.user]: width: 123
+```
+
+launch_arguments 參數可以傳入一個字典，或是一個由 (key, value) 組成的列表。
+
+- 列表: launch_arguments=[("width", LaunchConfiguration("width"))]
+
+  launch_arguments 是一個列表，每個元素都是一個元組，元組的第一個元素是參數名稱，第二個元素是參數的值，這個值可以是一個 LaunchConfiguration 物件，也可以是一個固定的值。
+  在這種情況下，("width", LaunchConfiguration("width")) 的意思是將 width 參數的值從當前 launch 檔案中取出，然後傳遞給被引用的 min.launch.py 中的 width 參數。
+
+- 字典: launch_arguments={"width": LaunchConfiguration("width")}.items()
+
+  launch_arguments 是一個字典，其鍵值對應於參數名稱和參數值。這種寫法和第一種情況是等效的。
+
+### 4. 隱式參數傳遞
+
+即使沒定義 DeclareLaunchArgument 和 LaunchConfiguration，在啟動 launch 文件時帶上參數，還是可以傳遞給子 launch 文件。
+
+我們來看看下例。沿用 min.launch.py，並定義 pass_to_child_launch_hidden.launch.py。
+
+- pass_to_child_launch_hidden.launch.py
 
 ```python
 import os
@@ -188,32 +268,14 @@ def generate_launch_description():
     return ld
 ```
 
-- min.launch.py
-
-```python
-from launch.launch_description import DeclareLaunchArgument, LaunchDescription
-from launch.substitutions import LaunchConfiguration
-from launch.actions import LogInfo
-
-def generate_launch_description():
-    width_arg = DeclareLaunchArgument("width", default_value="20")
-    ld = LaunchDescription(
-        [
-            width_arg,
-            LogInfo(msg=["width: ", LaunchConfiguration("width")]),
-        ]
-    )
-    return ld
-```
-
-執行 demo5.launch.py，並帶上參數 width，可以看到參數被傳遞到 min.launch.py 中。
+執行 pass_to_child_launch_hidden.launch.py，並帶上參數 width，可以看到參數被傳遞到 min.launch.py 中。
 
 ```bash
-$ ros2 launch my_ros2_tutorials demo5.launch.py
+$ ros2 launch my_ros2_tutorials pass_to_child_launch_hidden.launch.py
 [INFO] [launch]: Default logging verbosity is set to INFO
 [INFO] [launch.user]: width: 10
 
-$ ros2 launch my_ros2_tutorials demo5.launch.py width:=200
+$ ros2 launch my_ros2_tutorials pass_to_child_launch_hidden.launch.py width:=200
 [INFO] [launch]: Default logging verbosity is set to INFO
 [INFO] [launch.user]: width: 200
 ```
@@ -221,7 +283,7 @@ $ ros2 launch my_ros2_tutorials demo5.launch.py width:=200
 檢查可用的 launch 參數
 
 ```bash
-$ ros2 launch my_ros2_tutorials demo5.launch.py -s
+$ ros2 launch my_ros2_tutorials pass_to_child_launch_hidden.launch.py -s
 Arguments (pass arguments as '<name>:=<value>'):
 
   No arguments.
@@ -230,9 +292,9 @@ Arguments (pass arguments as '<name>:=<value>'):
 如預期，因為沒有使用 DeclareLaunchArgument 定義任何參數，所以會顯示 No arguments。
 這很容易造成混肴，這種做法可能會降低代碼的可讀性和可維護性。
 所以在撰寫 launch 文件時，應養成良好習慣，將所有需要用到的參數都定義在 launch 文件中。
-意即使用DeclareLaunchArgument 定義所有需要用到的參數。
+意即使用 DeclareLaunchArgument 定義所有需要用到的參數。
 
-### 4. 僅定義 DecalreLaunchArgument
+### 5. 僅定義 DecalreLaunchArgument
 
 ```python
 import os
@@ -257,11 +319,9 @@ def generate_launch_description():
             )
         )
     )
-
     talker_node = Node(
         package="demo_nodes_cpp",
         executable="talker",
-        # name=node_name,
     )
     ld = LaunchDescription()
     ld.add_action(node_name_arg)
@@ -284,12 +344,16 @@ $ ros2 launch my_ros2_tutorials demo_DeclareLaunchArgument_only.launch.py width:
 
 當此參數不需要傳值給內部的 Node 時，僅需要傳給內部其他的 launch 文件時
 
-### 5. LoadLaunchArgument
+### 6. 僅定義 LoadLaunchArgument
 
-如果我們把上述 demo4.launch.py 中的兩行註解掉，
+如果我們把上述 pass_to_child_node.launch.py 中的兩行註解掉，
 
 ```python
     # node_name_arg = DeclareLaunchArgument("node_name", default_value="my_talker")
     # node_name = LaunchConfiguration("node_name")
     node_name = LaunchConfiguration("node_name", default="my_talker")
 ```
+
+### 7. 結論
+
+xxx
