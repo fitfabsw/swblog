@@ -145,7 +145,7 @@ This is pre text
 
 #### Gist
 
-{{< gist spf13 7896402 >}}
+[View Gist spf13/7896402](https://gist.github.com/spf13/7896402)
 
 ## List Types
 
