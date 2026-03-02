@@ -21,9 +21,9 @@ Hugo ships with several [Built-in Shortcodes](https://gohugo.io/content-manageme
 
 ---
 
-## Twitter Simple Shortcode
+## X (Twitter) Shortcode
 
-{{< twitter_simple 1085870671291310081 >}}
+{{< x user="SansssTheFirst" id="1085870671291310081" >}}
 
 <br>
 
