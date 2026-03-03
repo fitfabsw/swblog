@@ -5,7 +5,7 @@ summary: "兩全其美：結合 Arch-Simple 的 asyncio 效率與 Arch-DAG 完�
 ShowToc: true
 TocOpen: true
 tags: ["測試自動化", "asyncio", "DAG", "Python", "Qt", "QML"]
-author: ["Kevin Lee"]
+author: ["Jason Ke"]
 draft: false
 ---
 
