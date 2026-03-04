@@ -133,14 +133,14 @@ resources:
 
 | 欄位         | 說明 |
 |-------------|------|
-| **test_item** | 測試項目（套件）名稱，須唯一。 |
+| **test_item** | 測試項目（群組）名稱，須唯一。 |
 | **tech**      | Tech 流程檔名，位於 `flows/tech/`，不含 `.csv`。例：`dut` → `flows/tech/dut.csv`。 |
 
 ### Tech CSV（例如 `flows/tech/dut.csv`）
 
 | 欄位             | 必填 | 說明 |
 |------------------|------|------|
-| **test_item**    | 首列 | 測試項目名稱，須與 Main CSV 一致；後續列可留空（同套件）。 |
+| **test_item**    | 首列 | 測試項目名稱，須與 Main CSV 一致；後續列可留空（同群組）。 |
 | **id**           | 是   | 此測試項目內的步驟 ID，供 `after` 依賴參考。 |
 | **description**  | 否   | 人類可讀描述。 |
 | **action**       | 是   | 動作名稱（如 `serial.send`、`common.delay`），對應 `actions/` 中的函式。 |
