@@ -1,34 +1,3 @@
----
-title: "Arch-Asyncio-DAG"
-date: 2026-03-02T09:00:00+08:00
-summary: "兩全其美：結合 Arch-Simple 的 asyncio 效率與 Arch-DAG 完整能力的混合架構"
-ShowToc: true
-TocOpen: true
-tags: ["測試自動化", "asyncio", "DAG", "Python", "Qt", "QML"]
-author: ["Jason Ke"]
-draft: false
----
-
-# Arch-Asyncio-DAG
-
-**兩全其美**：結合 Arch-Simple 的 asyncio 效率與 Arch-DAG 完整能力的混合架構。
-
-## 🎯 **混合架構理念**
-
-Arch-Asyncio-DAG 代表測試自動化架構的演進，融合兩套成熟系統的優點：
-
-### **來自 Arch-Simple** 🚀
-
-- **Asyncio 優先設計**：支援高併發，提升資源使用效率，並讓 UI 即時回應
-- **非同步執行引擎**：具依賴解析的非同步有向無環圖（DAG）執行
-- **即時回應**：非阻塞執行，UI 即時更新
-
-### **來自 Arch-DAG** 🏗️
-
-- **可上線功能**：穩健的錯誤處理、日誌與集中式資源管理
-- **CSV 流程定義**：Main + Tech 雙層 CSV，支援複雜測試情境
-- **簡易動作系統**：從 tech CSV 直接對應到模組中的 Python 函式
-
 ## 專案結構
 
 ```
@@ -65,7 +34,7 @@ arch-asyncio-dag/
 
 ### **Asyncio 優先設計**
 
-- **原生 async/await**：完整相容新版 Rust actor API
+- **原生 async/await**：可同時處理大量任務，提高資源效率，並讓 UI 更新保持即時不延遲。
 - **非阻塞操作**：所有 I/O 皆為非同步
 
 ### **完整執行引擎**
@@ -93,18 +62,48 @@ arch-asyncio-dag/
 - **直覺 API**：比類別式寫法更易讀、易改
 - **動態發現**：自動註冊與發現動作
 
+## 安裝與設定
+
+### 複製專案至本地端
+
+```bash
+git clone https://github.com/fitfabsw/facty_python.git
+cd facty_python
+```
+
+### 使用 uv 創建虛擬環境
+
+[uv](https://docs.astral.sh/uv/) 是一款快速的 Python 套件安裝及解析工具。如果尚未安裝 uv，請先安裝：
+
+```bash
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# 或使用 pip
+pip install uv
+```
+
+建立虛擬環境並安裝相依套件：
+
+```bash
+uv sync
+```
+
+這會在專案根目錄建立 `.venv`，並依 `pyproject.toml` 安裝所有相依套件。
+
+
 ## 快速開始
 
 ### GUI 應用程式
 
 ```bash
-python arch-asyncio-dag/applications/gui/app.py arch-asyncio-dag/flows/Main.csv
+uv run arch-asyncio-dag/applications/gui/app.py arch-asyncio-dag/flows/Main.csv
 ```
 
 ### CLI 測試
 
 ```bash
-python arch-asyncio-dag/applications/cli/async_single_tester.py arch-asyncio-dag/flows/Main.csv
+uv run arch-asyncio-dag/applications/cli/async_single_tester.py arch-asyncio-dag/flows/Main.csv
 ```
 
 ## 設定
