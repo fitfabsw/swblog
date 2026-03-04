@@ -69,6 +69,7 @@ arch-asyncio-dag/
 ```bash
 git clone https://github.com/fitfabsw/facty_python.git
 cd facty_python
+git checkout arch-asyncio-dag-qml
 ```
 
 ### 使用 uv 創建虛擬環境
