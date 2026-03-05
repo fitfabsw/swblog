@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0
 
       - name: Build
-        run: hugo --minify --baseURL "http://10.35.40.81/swblog/"
+        run: hugo --minify --baseURL "https://10.35.40.81/swblog/"
 
       - name: Deploy
         run: |
