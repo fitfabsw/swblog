@@ -19,6 +19,7 @@ cover:
   image: "ai.jpg"           # 圖片路徑（本地或 URL）
   alt: "ai"              # 圖片替代文字
   caption: "圖片說明"          # 圖片標題
+  responsiveImages: false # 保持原始比例
 
 
 
@@ -96,4 +97,4 @@ math: false
  :robot::robot::robot::robot::robot::robot:
 
 
-{{< figure src="ai.jpg" alt="範例圖片" caption="這是圖片說明" >}}
+{{< figure src="fit.png" alt="範例圖片" caption="這是圖片說明" >}}
