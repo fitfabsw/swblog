@@ -1,9 +1,13 @@
 ---
 title: "Blog UART Test"
-date: 2026-03-05T11:52:20+08:00
-draft: true
+date: 2026-03-05
 author: Peter Li
+description: "UART測試教學"
+math: true
+ShowToc: true
+TocOpen: true
 ---
+
 
 
 
