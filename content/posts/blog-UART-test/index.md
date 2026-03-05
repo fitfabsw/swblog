@@ -1,5 +1,5 @@
 ---
-title: "Blog UART Test"
+title: "UART 測試方法與實務說明"
 date: 2026-03-05
 author: Peter Li
 description: "UART測試教學"
@@ -11,7 +11,6 @@ TocOpen: true
 
 
 
-# UART 測試方法與實務說明
 
 UART（Universal Asynchronous Receiver/Transmitter）是嵌入式系統中最常見的序列通訊介面之一，廣泛應用於 MCU 與電腦、感測器、WiFi/BT/GPS 模組之間的資料交換。在韌體開發過程中，UART 驅動是否穩定，會直接影響系統除錯與產品可靠度，因此建立完整的 UART 測試流程非常重要。
 
@@ -39,7 +38,7 @@ UART 屬於**非同步通訊**，不需要時脈線（Clock），透過雙方事
 - No parity  
 - 1 stop bit  
 
----
+
 <p align="center">
   <img src="uart_connection.png" width="500">
 </p>
