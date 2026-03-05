@@ -13,6 +13,18 @@ TocOpen: true
 
 <!--more-->
 
+## 連線方式
+
+透過 SSH 連線至 MacMini：
+
+(需先連接到公司網路L300301)
+
+```bash
+ssh cpdx_sw@10.35.36.168
+```
+
+（密碼: N.......）
+
 ## 階段一：環境建置
 
 - 在 MacMini 上安裝推論框架（如 Ollama、LM Studio、llama.cpp、vLLM）
