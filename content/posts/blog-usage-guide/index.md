@@ -28,6 +28,44 @@ git push                     # 4. 推送至 GitHub
                              # 5. GitHub Actions 自動建置並部署
 ```
 
+### 環境準備
+
+本部落格需要 **Hugo** 和 **Go**。
+
+**安裝 Hugo：**
+
+```bash
+# macOS
+brew install hugo
+
+# Ubuntu / Debian
+sudo apt install hugo
+
+# Windows (Scoop)
+scoop install hugo
+
+# 或從官方下載：https://github.com/gohugoio/hugo/releases
+```
+
+**安裝 Go（Hugo Modules 需要）：**
+
+```bash
+# macOS
+brew install go
+
+# Ubuntu / Debian
+sudo apt install golang
+
+# 或從官方下載：https://go.dev/dl/
+```
+
+**驗證安裝：**
+
+```bash
+hugo version    # 確認顯示 extended 版本
+go version
+```
+
 ### 詳細步驟
 
 **首次使用 — Clone repo：**
