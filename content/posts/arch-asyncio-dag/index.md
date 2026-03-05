@@ -1,10 +1,14 @@
 ---
 title: "Asyncio DAG 架構設計"
-date: 2026-03-03
-description: "以 asyncio 與 DAG 為核心的非同步流程執行引擎"
-tags: ["python", "asyncio", "architecture"]
+date: 2026-03-02T09:00:00+08:00
+summary: "以 asyncio 與 DAG 為核心的非同步流程執行引擎"
 ShowToc: true
+TocOpen: true
+tags: ["測試自動化", "asyncio", "DAG", "Python", "Qt", "QML", "architecture"]
+author: ["Jason Ke"]
+draft: false
 ---
+
 
 ## 專案結構
 
@@ -75,9 +79,8 @@ arch-asyncio-dag/
 ### 複製專案至本地端
 
 ```bash
-git clone https://github.com/fitfabsw/facty_python.git
-cd facty_python
-git checkout arch-asyncio-dag-qml
+git clone https://github.com/fitfabsw/cpdx_test_engine.git
+cd cpdx_test_engine
 ```
 
 ### 使用 uv 創建虛擬環境
@@ -99,6 +102,7 @@ uv sync
 ```
 
 這會在專案根目錄建立 `.venv`，並依 `pyproject.toml` 安裝所有相依套件。
+
 
 ## 快速開始
 
@@ -138,24 +142,25 @@ resources:
 
 ### Main CSV（例如 `MainSimple.csv`）
 
-| 欄位          | 說明                                                                               |
-| ------------- | ---------------------------------------------------------------------------------- |
-| **test_item** | 測試項目（群組）名稱，須唯一。                                                     |
+| 欄位         | 說明 |
+|-------------|------|
+| **test_item** | 測試項目（群組）名稱，須唯一。 |
 | **tech**      | Tech 流程檔名，位於 `flows/tech/`，不含 `.csv`。例：`dut` → `flows/tech/dut.csv`。 |
 
 ### Tech CSV（例如 `flows/tech/dut.csv`）
 
-| 欄位                | 必填   | 說明                                                                               |
-| ------------------- | ------ | ---------------------------------------------------------------------------------- |
-| **test_item**       | 首列   | 測試項目名稱，須與 Main CSV 一致；後續列可留空（同群組）。                         |
-| **id**              | 是     | 此測試項目內的步驟 ID，供 `after` 依賴參考。                                       |
-| **description**     | 否     | 人類可讀描述。                                                                     |
-| **action**          | 是     | 動作名稱（如 `serial.send`、`common.delay`），對應 `actions/` 中的函式。           |
-| **command**         | 視動作 | 命令字串（如序列命令）。換行請用 `\n`。                                            |
-| **after**           | 否     | 此步驟所依賴的步驟 ID，逗號分隔。僅在所列步驟完成後執行。                          |
-| **timeout**         | 否     | 等待**預期回應**（如 `wait_for.string`）的秒數。預設 `1.0`。用於 `serial.send`。   |
-| **needs_resources** | 否     | 資源名稱，逗號分隔。步驟執行前會獨佔取得這些資源。                                 |
-| **delay**           | 否     | 在**執行此步驟前**延遲秒數（依賴滿足後）。預設 `0.0`。                             |
-| **exit_early**      | 否     | 若為 `true`，此步驟失敗會中止整個流程。預設 `false`。                              |
-| **retry**           | 否     | 保留供日後使用。                                                                   |
-| **parameters**      | 否     | 動作專用選項的 JSON。例：`{"wait_for": {"string": "> ft:ok"}}`、`{"seconds": 2}`。 |
+| 欄位             | 必填 | 說明 |
+|------------------|------|------|
+| **test_item**    | 首列 | 測試項目名稱，須與 Main CSV 一致；後續列可留空（同群組）。 |
+| **id**           | 是   | 此測試項目內的步驟 ID，供 `after` 依賴參考。 |
+| **description**  | 否   | 人類可讀描述。 |
+| **action**       | 是   | 動作名稱（如 `serial.send`、`common.delay`），對應 `actions/` 中的函式。 |
+| **command**      | 視動作 | 命令字串（如序列命令）。換行請用 `\n`。 |
+| **after**        | 否   | 此步驟所依賴的步驟 ID，逗號分隔。僅在所列步驟完成後執行。 |
+| **timeout**      | 否   | 等待**預期回應**（如 `wait_for.string`）的秒數。預設 `1.0`。用於 `serial.send`。 |
+| **needs_resources** | 否 | 資源名稱，逗號分隔。步驟執行前會獨佔取得這些資源。 |
+| **delay**        | 否   | 在**執行此步驟前**延遲秒數（依賴滿足後）。預設 `0.0`。 |
+| **exit_early**   | 否   | 若為 `true`，此步驟失敗會中止整個流程。預設 `false`。 |
+| **retry**        | 否   | 保留供日後使用。 |
+| **parameters**   | 否   | 動作專用選項的 JSON。例：`{"wait_for": {"string": "> ft:ok"}}`、`{"seconds": 2}`。 |
+r
