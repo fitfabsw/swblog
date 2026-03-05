@@ -9,9 +9,60 @@ ShowToc: true
 TocOpen: true
 ---
 
-本文整合了部落格所有寫作功能的說明，包含文章建立、Front Matter 設定、Markdown 語法，以及自訂 Shortcodes 的完整用法。
+本文整合了部落格所有寫作功能的說明，包含工作流程、文章建立、Front Matter 設定、Markdown 語法，以及自訂 Shortcodes 的完整用法。
 
 <!--more-->
+
+## 工作流程
+
+本部落格使用 Hugo 靜態網站產生器，搭配 GitHub Actions + Self-hosted Runner 自動部署至公司內部 server。
+
+### 整體流程
+
+```
+git pull                     # 1. 取得最新內容
+hugo server -D               # 2. 本地預覽（含草稿）
+# ... 編輯文章 ...
+git add & git commit          # 3. 提交變更
+git push                     # 4. 推送至 GitHub
+                             # 5. GitHub Actions 自動建置並部署
+```
+
+### 詳細步驟
+
+**首次使用 — Clone repo：**
+
+```bash
+git clone <repo-url>
+cd swblog
+```
+
+**日常編輯：**
+
+```bash
+git pull                          # 取得最新內容
+hugo server -D                    # 啟動本地預覽（http://localhost:1313）
+```
+
+編輯完成後推送：
+
+```bash
+git add content/posts/my-post/    # 暫存變更的檔案
+git commit -m "Add new post"      # 提交
+git push                          # 推送至 GitHub
+```
+
+### 自動部署
+
+Push 到 `fit-cpd-sw` 分支後，GitHub Actions 會自動觸發部署：
+
+1. Self-hosted Runner（公司內部 server）接收任務
+2. 執行 `hugo --minify` 建置靜態網站
+3. 將產出的檔案部署至 `/var/www/swblog/`
+
+部署完成後即可透過公司內部網路存取更新後的部落格：[https://10.35.40.81/swblog/](https://10.35.40.81/swblog/)
+
+---
 
 ## 如何建立一篇文章
 
