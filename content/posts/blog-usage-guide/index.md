@@ -33,7 +33,7 @@ git push                     # 4. 推送至 GitHub
 **首次使用 — Clone repo：**
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/fitfabsw/swblog.git
 cd swblog
 ```
 
