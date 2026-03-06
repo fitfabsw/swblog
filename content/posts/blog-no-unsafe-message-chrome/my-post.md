@@ -3,7 +3,7 @@ title: "No unsafe page on Chrome"
 date: 2026-03-05
 author: Simon Chen
 description: "用Chrome連https沒任何反應"
-tags: ["lua", "TCP", "code"]
+tags: ["Chrome", "Curl", "卡巴斯基"]
 math: true
 ShowToc: true
 TocOpen: true
