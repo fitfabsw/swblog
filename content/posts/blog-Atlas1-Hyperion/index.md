@@ -89,3 +89,30 @@ Station.rush 是由哪個程式呼叫執行？
 Hyperion.app = 前台/UI　<br>
 Atlas core = station 生命周期管理者 <br>
 Rush runtime = 實際執行 Station.rush 的語言引擎 <br>
+
+### 3. loadExample角色
+
+Hyperion.app 不會去跑 loadExample。
+loadExample 是你在 Terminal 手動執行的 shell script。
+
+它的作用是先把這個 example station 的檔案安裝/複製到 Atlas 的工作目錄，例如：
+
+- Sequences
+
+- Resources
+
+- ParseDefinitions
+
+- Plugins
+
+從你上傳的 loadExample / .loadExampleHelper.sh 來看，它做的事是：
+
+- 呼叫 init
+
+- 把 example 的 Sequences 等資料夾複製到 ~/Library/Atlas/...
+
+- 編譯 / 複製 plugin
+
+所以 loadExample 比較像是：
+
+「把這個 station 設定成目前 Atlas 要用的內容」
