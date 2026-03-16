@@ -15,7 +15,7 @@ TocOpen: true                  # 預設展開目錄
 
 # 封面圖片
 cover:
-  image: "/img/brain_loading.jpeg" # 圖片路徑（本地或 URL）
+  image: "/swblog/img/brain_loading.jpeg" # 圖片路徑（本地或 URL）
   alt: "Atlas2"              # 圖片替代文字 
 
 
@@ -47,7 +47,8 @@ cover:
 1. **把 PPT 轉成 PDF** - ex.slides.pdf
 2. **放進 Hugo 的 static 資料夾** - 在 Hugo專案資料夾/static/建立 -> slides資料夾，把 slides.pdf 放進去
  - static/ 是一個專門放「不需要處理」的檔案資料夾，放入裡面的檔案會直接變成網站根目錄資源，適合任何要「直接被瀏覽器讀取」的檔案
+ - 注意： 由於Hugo baseURL設定為：“/” ，在子路徑部署（/swblog/） 情況下，需要加上/swblog/才能正確讀取到
 3. **建立簡單滑動頁面** - 在content/建立.md檔案 內容加入
 ```html {linenos=true}
-<iframe src="/slides/slides.pdf" width="100%" height="500px"></iframe>
+<iframe src="/swblog/slides/slides.pdf" width="100%" height="500px"></iframe>
 ```
