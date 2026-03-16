@@ -24,9 +24,9 @@ cover:
 
 
 ### 1.Test_Station測站介紹
-<iframe src="/slides/SW_test_station_introducing_20260316_All-TestItem.pdf" width="100%" height="500px"></iframe>
+<iframe src="/swblog/slides/SW_test_station_introducing_20260316_All-TestItem.pdf" width="100%" height="500px"></iframe>
 
-<a href="/slides/SW_test_station_introducing_20260316_All-TestItem.pptx" download>
+<a href="/swblog/slides/SW_test_station_introducing_20260316_All-TestItem.pptx" download>
   <button style="
     padding:12px 20px;
     font-size:16px;
