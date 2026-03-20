@@ -28,7 +28,37 @@ draft: true
 3.自動化工站監測-標準化設備製造及監控部件,可知其使用次數及狀態
 抓出 AI工具整合成新的APP,與OVL並存執行,下位機有兩個USB ports,其一與OVL通訊,                                                             其一監控儀器部件狀態(Weak-AI),先有資料才能進行更難的AI處理
 
+==========================================
+20260319_note
 
-MCU 1 to USB_01  ,connect to Mac USB1 ,Atlas2 Overlay
-MCU 2 to USB_02 ,connect to Mac USB2 ,Monitor Overlay 
-   Predict the fail issue ,execute System reset or inform 
+1.優化 atlas2 log  file ,關閉tech.lua  列印功能 ,test time & log皆有改善
+
+    log.LogInfo("Tech.main start")
+    log.LogInfo("itemInfo: ", itemInfo)
+    for k,v in pairs(itemInfo) do
+      log.LogInfo("itemInfo: ", k, v)
+    end
+
+2.修改FWDL.lua  —> Bud QT & wireless charger 已修改完成
+
+
+
+3.test log 收集至J174特定資料夾. —>Kenny進行中
+
+4.透過AI快速分析log 
+a.統計CPD-X  insight account .  —>Simon 抓取Prox  insight log ,HWTE 要將檔案傳給FIT 達哥分析,產生新報表
+b.bud QT製造幾個fail mode   —> Holder通訊中斷問題,無法產生新的問題,無法以其他方式產生,可以改透過爬蟲來抓
+
+5.Atlas2參數最佳化工具 -------縮短test time  
+—> bud QT /wireless charger  透過copilot/claude皆可使用
+   Atlas2 CLI cmd—》atlaslauncher start station.plist
+
+6.大語言模型在工廠實際運用所遇到的問題   
+AI model ,付費/開源會遇到的問題   --> 雲端LLM & 開源LLM 
+
+https://ikala.ai/zh-tw/blog/ikala-ai-insight/vibe-coding-intro/#:~:text=%E5%8A%A0%E9%80%9F%E5%8E%9F%E5%9E%8B%E9%96%8B%E7%99%BC%EF%BC%8C%E6%8F%90%E9%AB%98AI%20%E9%96%8B%E7%99%BC%E6%95%88%E7%8E%87%20Vibe%20Coding%20%E7%89%B9%E5%88%A5%E9%81%A9%E5%90%88%E7%94%A8%E6%96%BC%E5%BF%AB%E9%80%9F%E8%BF%AD%E4%BB%A3%E8%88%87MVP%EF%BC%88Minimum%20Viable%20Product%EF%BC%89%E9%A9%97%E8%AD%89%E9%9A%8E%E6%AE%B5%E3%80%82%20AI%20%E8%83%BD%E6%A0%B9%E6%93%9A%E9%9C%80%E6%B1%82%E5%8D%B3%E6%99%82%E7%94%A2%E7%94%9F%E6%A8%A3%E6%9D%BF%E7%A8%8B%E5%BC%8F%E7%A2%BC%E3%80%81%E6%95%B4%E5%90%88API%E3%80%81%E9%80%B2%E8%A1%8C%E9%82%8F%E8%BC%AF%E9%87%8D%E6%A7%8B%EF%BC%8C%E5%A4%A7%E5%B9%85%E7%B8%AE%E7%9F%AD%E9%96%8B%E7%99%BC%E6%99%82%E7%A8%8B%EF%BC%8C%E9%81%8E%E5%8E%BB%E9%9C%80%E6%95%B8%E9%80%B1%E6%89%8D%E8%83%BD%E5%AF%A6%E4%BD%9C%E7%9A%84%E5%8A%9F%E8%83%BD%EF%BC%8C%E7%8F%BE%E5%9C%A8%E5%8F%AF%E8%83%BD%E9%80%8F%E9%81%8E%E5%B9%BE%E6%AC%A1Prompt%20%E5%B0%8D%E8%A9%B1%E5%B0%B1%E8%83%BD%E5%AE%8C%E6%88%90%E5%8E%9F%E5%9E%8B%E3%80%82
+
+
+J174 OS 10.15 跑開源模型的可能性  -->    “Groundhog” 
+
+
