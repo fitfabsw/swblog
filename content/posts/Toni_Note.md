@@ -8,7 +8,7 @@ categories: ["教學"]           # 分類
 series: ["Hugo 指南"]          # 系列文章
 aliases: ["/old-url"]         # URL 別名，用於舊文章重導向
 summary: "AI"                 # 文章列表中顯示的摘要
-draft: true    
+draft: false    
 
 ---
 以下為AI可應用於測試工站的研發想定,後續可再增加
