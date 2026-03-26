@@ -1,6 +1,6 @@
 ---
 title: "Toni_note"
-date: 2026-03-20
+date: 2026-03-26
 author: "Toni Lin"            # 作者，也可用陣列：["Kevin Lee", ""]
 description: "AI mission"      # 搜尋引擎與社群分享用的描述
 tags: ["hugo", "markdown"]    # 標籤
@@ -11,6 +11,39 @@ summary: "AI"                 # 文章列表中顯示的摘要
 draft: false    
 
 ---
+2026/3/26 noted
+1.產生bud QT test issue   —>其他方式產生 out of limit  ＆ grab bud QT fail log from insight 
+-->finish￼
+2.test log 收集至M4特定資料夾. —>Kenny進行中 ,J174  RJ45 連至M4電腦 .
+
+3.透過AI快速分析log  ,Apple 權限至2026/4/13 到期
+a.統計CPD-X  insight account .  —>   Simon 抓取Prox  /Bud QT /case QT /wireless charger/IMU insight log ,待抓 B498 bud QT/Regia 10mm /Regia xtalk /BRF /B498 Bud gatekeeper/B499 case gatekeeper
+b.根據log 使用copolit 產生swift 程式擷取log內異常原因 
+Short tern :
+filter 擷取fail ,訂定搜尋資訊.格式  ,各站DRI/SDRI幫忙建立
+Long tern :
+log快速判斷fail cause & analysis
+
+
+4.Atlas2參數最佳化工具 -------縮短test time  
+—> bud QT /wireless charger  透過copilot/claude皆可使用.
+—>重灌兩台intel Macbook
+Applicate Atlas2 CLI cmd—》
+open /AppleInternal/Applications/AtlasRecordsUI.app
+open /AppleInternal/Applications/AtlasUI.app
+atlaslauncher start station.plist 
+    
+5.大語言模型在工廠實際運用所遇到的問題   
+J174 OS 10.15 跑開源模型的可能性 ?     “Groundhog” 
+
+a.model 檔案過大,客人會質疑
+b.DRI 在產線使用的必要性,在個人電腦做Root cause ,除非是即時性的
+Conclusion: cancel
+
+6.python 新公版開發
+—>統計執行項目及人員
+
+==========================================
 以下為AI可應用於測試工站的研發想定,後續可再增加
 
 1.AI幫助專業感測器測站開發-
