@@ -3,10 +3,16 @@ title: "No unsafe page on Chrome"
 date: 2026-03-05
 author: Simon Chen
 description: "用Chrome連https沒任何反應"
-tags: ["lua", "TCP", "code"]
+tags: ["Chrome", "Curl", "卡巴斯基"]
 math: true
 ShowToc: true
 TocOpen: true
+
+cover:
+  image: "c.png"           # 圖片路徑（本地或 URL）
+  alt: "chrome"              # 圖片替代文字
+  caption: "curl error"      # 圖片標題
+  responsiveImages: false  # 保持原始比例
 ---
 
 用Chrome, 連接https://<內網IP>時，

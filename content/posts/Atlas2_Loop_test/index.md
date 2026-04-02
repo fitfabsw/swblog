@@ -15,9 +15,8 @@ TocOpen: true                  # 預設展開目錄
 
 # 封面圖片
 cover:
-  image: "./img/brain_loading.jpeg" # 圖片路徑（本地或 URL）
+  image: "img/brain_loading.jpeg" # 圖片路徑（本地或 URL）
   alt: "Atlas2"              # 圖片替代文字
-  caption: "OK"  
 
 ---
 
