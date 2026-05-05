@@ -26,13 +26,13 @@ TocOpen: true
 
 {{< llm_table >}}
 
-<a href="/llm_table/llm_table.html" download>📥 下載表格 HTML</a>
+<a href="/llm_table/llm_table.html" target="_blank">📥 下載表格 HTML</a>
 
 
  <p align="center">
   <img src="image1.png" style="width:100%; max-width:100%;">
 </p>
-<a href="/llm_table/llm_table.pptx" download>📥 下載 PowerPoint</a>
+<a href="/llm_table/llm_table.pptx" target="_blank">📥 下載 PowerPoint</a>
 
  
 
