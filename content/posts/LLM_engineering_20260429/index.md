@@ -21,9 +21,18 @@ TocOpen: true
 1. 加入MMLU三門學科進行測試，4B以上模型的精確度皆有大於0.7。
 2. 在2B, 0.8B參數量減少之後，對於CS科目表現明顯變差，同時也可觀察到mbpp, humaneval準確度也是表現不佳，代表模型參數量減少會造成寫程式以及CS能力減低，因此，如果有coding的應用場景，對於這種小模型應該要避免，或是客制化進行壓縮與微調。
 3. Gemma3準確度與Gemma4相近，Gemma3推論時間更短。
+
+
+
+{{< llm_table >}}
+
+<a href="/llm_table/llm_table.html" download>📥 下載表格 HTML</a>
+
+
  <p align="center">
   <img src="image1.png" style="width:100%; max-width:100%;">
 </p>
+<a href="/llm_table/llm_table.pptx" download>📥 下載 PowerPoint</a>
 
  
 
