@@ -1,0 +1,63 @@
+<div style="overflow-x:auto; border-radius:12px; border:1px solid #B5D4F4;">
+<style>
+.lt{border-collapse:collapse;white-space:nowrap;width:100%;font-size:12px;}
+.lt thead tr:first-child th{background:#185FA5;color:#fff;font-weight:500;padding:8px 12px;border:none;}
+.lt thead tr:last-child th{background:#E6F1FB;color:#0C447C;font-weight:500;padding:6px 10px;border:none;font-size:11px;}
+.lt tbody td{padding:7px 10px;border-bottom:0.5px solid #B5D4F4;color:#222;text-align:center;}
+.lt tbody tr:last-child td{border-bottom:none;}
+.lt tbody tr:hover td{background:#E6F1FB;}
+.lt td:first-child,.lt thead th:first-child{position:sticky;left:0;z-index:2;text-align:left;}
+.lt thead tr:first-child th:first-child{background:#0C447C;}
+.lt thead tr:last-child th:first-child{background:#E6F1FB;color:#0C447C;}
+.lt tbody td:first-child{background:#fff;border-right:2px solid #B5D4F4;font-weight:500;min-width:200px;}
+.lt tbody tr:hover td:first-child{background:#E6F1FB;}
+.lt a{color:#185FA5;text-decoration:none;font-weight:500;}
+.lt a:hover{text-decoration:underline;}
+.lt .chk{color:#185FA5;font-size:14px;}
+</style>
+<table class="lt">
+  <thead>
+    <tr>
+      <th rowspan="2">模型名稱</th>
+      <th rowspan="2">大小 (GB)</th>
+      <th rowspan="2">Mem (GB)</th>
+      <th colspan="3">Gsm8k (20題)</th>
+      <th colspan="3">Mbpp (20題)</th>
+      <th colspan="3">HumanEval (20題)</th>
+      <th colspan="3">MATH (7題)</th>
+      <th colspan="3">MMLU CS/PHY/EE (30題)</th>
+      <th rowspan="2">Vision</th>
+      <th rowspan="2">Tool use</th>
+    </tr>
+    <tr>
+      <th>準確度</th><th>總時間</th><th>每題</th>
+      <th>準確度</th><th>總時間</th><th>每題</th>
+      <th>準確度</th><th>總時間</th><th>每題</th>
+      <th>準確度</th><th>總時間</th><th>每題</th>
+      <th>準確度</th><th>總時間</th><th>每題</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><a href="https://lmstudio.ai/models/qwen/qwen3.5-9b">Qwen3.5-9B-Q4K_M-GGUF (think)</a></td><td>6.10</td><td>8.13</td><td>0.95</td><td>43m49s</td><td>2m11s</td><td>0.7</td><td>7m04s</td><td>21.2s</td><td>1</td><td>11m45s</td><td>35.25s</td><td>0.71</td><td>42m18s</td><td>6m03s</td><td>1/0.9/0.9</td><td>23m55s</td><td>47.8s</td><td class="chk">✓</td><td class="chk">✓</td></tr>
+    <tr><td><a href="https://huggingface.co/unsloth/Qwen3.5-9B-GGUF">Qwen3.5-9B-Q4K_S-GGUF</a></td><td>6.72</td><td>7.40</td><td>0.95</td><td>7m20s</td><td>22s</td><td>0.55</td><td>6m07s</td><td>18.3s</td><td>0.9</td><td>1m59s</td><td>5.95s</td><td>0.85</td><td>12m20s</td><td>1m46s</td><td>1/0.9/0.8</td><td>21m10s</td><td>42.3s</td><td class="chk">✓</td><td class="chk">✓</td></tr>
+    <tr><td><a href="https://huggingface.co/RepublicOfKorokke/Qwen3.5-9B-mlx-lm-mxfp4">Qwen3.5-9B-MXFP4-MLX (think)</a></td><td>4.45</td><td>5.12</td><td>0.60</td><td>39m37s</td><td>1m58s</td><td>0.6</td><td>5m39s</td><td>16.9s</td><td>0.25</td><td>15m23s</td><td>46.15s</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="chk">✓</td></tr>
+    <tr><td>Qwen3.5-9B-NVFP4-GGUF</td><td>4.71</td><td>5.62</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Qwen3.5-9B-Crow-GGUF</td><td>6.26</td><td>5.80</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td><a href="https://huggingface.co/Jackrong/Qwen3.5-9B-Claude-4.6-Opus-Reasoning-Distilled-GGUF">Qwen3.5-9B-Claude-GGUF (think)</a></td><td>4.97</td><td>5.54</td><td>0.4</td><td>5m11s</td><td>15.5s</td><td>0.7</td><td>5m48s</td><td>17.4s</td><td>0.85</td><td>2m13s</td><td>6.65s</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="chk">✓</td></tr>
+    <tr><td>Qwen3.5-9B-4bit-MLX</td><td>5.57</td><td>6.37</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Qwen3.5-9B-8bit-MLX</td><td>9.74</td><td>10.54</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Qwen3.5-9B-OptiQ-MLX</td><td>5.65</td><td>6.40</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td><a href="https://huggingface.co/TheCluster/Qwen3.5-9B-Claude-4.6-HighIQ-INSTRUCT-HERETIC-UNCENSORED-MLX-mxfp8">Qwen3.5-9B-Claude-MLX</a></td><td>9.19</td><td>9.99</td><td>0.9</td><td>19m35s</td><td>58.75s</td><td>0.8</td><td>9m38s</td><td>28.9s</td><td>0.7</td><td>18m52s</td><td>56.60s</td><td>0.85</td><td>16m15s</td><td>2m19s</td><td>0.9/1/0.9</td><td>35m31s</td><td>71.0s</td><td class="chk">✓</td><td class="chk">✓</td></tr>
+    <tr><td><a href="https://huggingface.co/lmstudio-community/Qwen3.5-4B-GGUF">Qwen3.5-4B Q4K_M-GGUF (think)</a></td><td>3.4</td><td>3.76</td><td>0.75</td><td>24m19s</td><td>1m12s</td><td>0.55</td><td>3m51s</td><td>11.55s</td><td>0.95</td><td>7m7s</td><td>21.35s</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="chk">✓</td><td class="chk">✓</td></tr>
+    <tr><td><a href="https://huggingface.co/unsloth/Qwen3.5-4B-GGUF">Qwen3.5-4B Q4K_S-GGUF</a></td><td>3.9</td><td>4.34</td><td>0.95</td><td>4m24s</td><td>13.2s</td><td>0.55</td><td>4m16s</td><td>12.8s</td><td>1</td><td>1m9s</td><td>3.45s</td><td>0.85</td><td>9m11s</td><td>1m19s</td><td>0.8/1/0.9</td><td>17m30s</td><td>35.0s</td><td class="chk">✓</td><td class="chk">✓</td></tr>
+    <tr><td><a href="https://huggingface.co/unsloth/Qwen3.5-2B-GGUF">Qwen3.5-2B Q4K_S-GGUF</a></td><td>2.5</td><td>2.82</td><td>0.7</td><td>4m32s</td><td>13.6s</td><td>0.45</td><td>1m47s</td><td>5.3s</td><td>0.6</td><td>43s</td><td>2.15s</td><td>0.57</td><td>4m52s</td><td>42s</td><td>0.6/0.9/0.9</td><td>7m31s</td><td>15.0s</td><td class="chk">✓</td><td class="chk">✓</td></tr>
+    <tr><td><a href="https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF">Qwen3.5-0.8B Q80-GGUF</a></td><td>1.01</td><td>1.37</td><td>0.35</td><td>3m2s</td><td>9.1s</td><td>0.2</td><td>57s</td><td>2.8s</td><td>0.35</td><td>26s</td><td>1.30s</td><td>0.42</td><td>8m14s</td><td>1m11s</td><td>0.2/0.8/0.8</td><td>7m55s</td><td>15.8s</td><td class="chk">✓</td><td class="chk">✓</td></tr>
+    <tr><td><a href="https://huggingface.co/Qwen/Qwen2.5-Coder-14B-Instruct-GGUF">Qwen2.5-coder-14B-instruct-Q4K_M-GGUF</a></td><td>8.37</td><td>9.72</td><td>0.85</td><td>8m24s</td><td>25.2s</td><td>0.85</td><td>7m51s</td><td>23.55s</td><td>1</td><td>2m36s</td><td>7.8s</td><td>0.71</td><td>7m37s</td><td>1m05s</td><td>0.9/0.5/0.7</td><td>9m47s</td><td>19.6s</td><td></td><td class="chk">✓</td></tr>
+    <tr><td><a href="https://huggingface.co/mlx-community/Llama-3.2-3B-Instruct-4bit">Llama3.2-3B-Instruct-4bit-MLX</a></td><td>1.8</td><td>2.52</td><td>0.67</td><td>6m47s</td><td>4s</td><td>0.4</td><td>2m28s</td><td>7.4s</td><td>0.4</td><td>1m15s</td><td>3.75s</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="chk">✓</td></tr>
+    <tr><td><a href="https://huggingface.co/bartowski/Llama-3.2-3B-Instruct-GGUF">Llama3.2-3B-instruct-GGUF</a></td><td>1.8</td><td>2.45</td><td>0.7</td><td>1m44s</td><td>5.2s</td><td>0.5</td><td>2m20s</td><td>7s</td><td>0.75</td><td>1m01s</td><td>3.05s</td><td>0.42</td><td>1m37s</td><td>14s</td><td></td><td></td><td></td><td></td><td class="chk">✓</td></tr>
+    <tr><td><a href="https://huggingface.co/mlx-community/gemma-4-e4b-it-8bit">Gemma4-4B-8bit-MLX</a></td><td>8.38</td><td>9.92</td><td>0.95</td><td>8m21s</td><td>25.05s</td><td>0.75</td><td>12m6s</td><td>36.30s</td><td>0.95</td><td>4m50s</td><td>14.50s</td><td>1</td><td>13m42s</td><td>1m58s</td><td>0.9/0.8/0.7</td><td>34m18s</td><td>68.6s</td><td class="chk">✓</td><td class="chk">✓</td></tr>
+    <tr><td><a href="https://huggingface.co/mlx-community/gemma-3-12b-it-qat-4bit">Gemma3-12B-it-qat-4bit-MLX</a></td><td>8.1</td><td>9.04</td><td>0.9</td><td>6m52s</td><td>20.6s</td><td>0.75</td><td>3m46s</td><td>11.3s</td><td>0.95</td><td>1m59s</td><td>5.95s</td><td>0.71</td><td>7m48s</td><td>66.9s</td><td>0.8/0.8/0.7</td><td>15m26s</td><td>30.9s</td><td class="chk">✓</td><td class="chk">✓</td></tr>
+    <tr><td><a href="https://huggingface.co/lmstudio-community/gemma-3n-E4B-it-MLX-8bit">Gemma3N-E4B-it-8bit-MLX</a></td><td>9.3</td><td>8.95</td><td>0.8</td><td>4m36s</td><td>13.8s</td><td>0.75</td><td>3m31s</td><td>10.6s</td><td>0.9</td><td>1m19s</td><td>4s</td><td>0.71</td><td>5m18s</td><td>45.4s</td><td>0.8/0.6/0.9</td><td>12m46s</td><td>25.5s</td><td class="chk">✓</td><td class="chk">✓</td></tr>
+  </tbody>
+</table>
+</div>
